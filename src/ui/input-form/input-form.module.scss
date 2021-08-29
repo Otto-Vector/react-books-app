@@ -1,0 +1,14 @@
+.inputForm {
+  width: 100%;
+  background-color: transparent;
+}
+
+.dropdowns {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+.dropdownLeft, .dropdownRight {
+  width: 40%;
+}

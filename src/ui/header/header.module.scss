@@ -1,0 +1,21 @@
+@import "src/styles/variables";
+@import "src/styles/mixins";
+
+.header {
+  @include flex-center(column);
+  padding: rem(40);
+
+  text-align: center;
+  color: white;
+}
+
+.head {
+  font-size: rem(24);
+  font-weight: bold;
+  line-height: rem(40);
+  text-shadow: rem(2) rem(1) black;
+}
+
+.inputForm {
+  width: 80%;
+}
