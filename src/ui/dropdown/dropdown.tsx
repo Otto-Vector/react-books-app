@@ -2,10 +2,7 @@ import React from 'react';
 import classes from './dropdown.module.scss'
 
 
-// type labelText = string
-
-export class Dropdown extends React.Component<Readonly<typeof labelText>> {
-
+export class Dropdown extends React.Component<Readonly<any>> {
 
     constructor(props: any) {
         super(props);
@@ -16,7 +13,7 @@ export class Dropdown extends React.Component<Readonly<typeof labelText>> {
     render(): React.ReactNode {
         return (
         <div className={classes.dropdown}>
-            <label htmlFor={classes.dropdown} className={classes.label}>{this.inLabelText}
+            <label className={classes.label}>{this.inLabelText}
             </label>
                 <select id={"77"} className={classes.select}>
                     <option value="value1">Значение 1</option>
