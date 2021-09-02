@@ -18,6 +18,7 @@ $dropdown--font : $Quicksand;
     font-size: rem(25);
     top: unset;
     bottom: rem(13);
+    z-index: revert;
   }
 }
 
@@ -55,6 +56,5 @@ $dropdown--font : $Quicksand;
 
     &:active {
     }
-
 
   }

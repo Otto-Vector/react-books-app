@@ -1,24 +1,35 @@
 import React from 'react';
 import classes from './dropdown.module.scss'
 
+export type selectValues = {
+    value: string
+    text: string
+}
 
-export class Dropdown extends React.Component<Readonly<any>> {
+export interface DropdownProps {
+    labelText? : string
+    selectValues? : selectValues[]
+}
 
-    constructor(props: any) {
-        super(props);
-    }
 
-    inLabelText = this.props.labelText || "Label text"
+export class Dropdown extends React.Component<Readonly<DropdownProps>> {
+
+    inLabelText : string = this.props.labelText || "Label text not set"
+    inSelectValues : selectValues[] = this.props.selectValues || [{value: '1', text:'One'}, {value: '2', text:'Two'}]
 
     render(): React.ReactNode {
         return (
         <div className={classes.dropdown}>
             <label className={classes.label}>{this.inLabelText}
             </label>
-                <select id={"77"} className={classes.select}>
-                    <option value="value1">Значение 1</option>
-                    <option value="value2" selected>Значение 2</option>
-                    <option value="value3">Значение 3</option>
+                <select id={"77"} className={classes.select} defaultValue={'value1'}>
+                    {
+                        this.inSelectValues.map(
+                            ({value,text}) =>
+                                <option value={value} key={value}> {text} </option>
+                        )
+                    }
+
                 </select>
         </div>
     );

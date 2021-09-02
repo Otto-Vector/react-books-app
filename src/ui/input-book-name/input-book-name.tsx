@@ -1,5 +1,6 @@
 import React, {MouseEventHandler} from "react";
-import './input-book-name.scss'
+// import './input-book-name.scss'
+import classes from './input-book-name.module.scss'
 
 
 export class InputBookName extends React.Component{
@@ -10,16 +11,6 @@ export class InputBookName extends React.Component{
         this.textInput = React.createRef()
     }
 
-    private thisClass : string = 'input-book-name'
-    private readonly mainClass = {
-        main: this.thisClass,
-        input: this.thisClass + '__input',
-        mode: {
-            search: this.thisClass + '--search',
-            dropdown: this.thisClass + '--dropdown'
-        },
-        clearButton : this.thisClass + '__clear-search'
-    }
 
     private readonly inputName = 'bookNameSearch'
     private readonly inputType = 'text'
@@ -36,15 +27,15 @@ export class InputBookName extends React.Component{
     render() {
         return (
             <div
-                className={`${this.mainClass.main} ${this.mainClass.mode.search}` }>
+                className={`${classes.inputBookName} ${classes.search}` }>
                 <button type='reset'
-                        className={ this.mainClass.clearButton }
+                        className={ classes.clearSearch }
                         onClick={this.focus()}
                 > </button>
                 <input id={ this.inputName }
+                       className={ classes.input }
                        placeholder={ this.inputPlaceholder }
                        type={ this.inputType }
-                       className={ this.mainClass.input }
                        ref={this.textInput}
                 />
             </div>

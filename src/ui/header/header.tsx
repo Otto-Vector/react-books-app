@@ -9,9 +9,9 @@ const headerStyle: React.CSSProperties = {
 
 export class Header extends React.Component {
 
-    constructor(props: any) {
-        super(props);
-    }
+    // constructor(props: any) {
+    //     super(props);
+    // }
 
     headerText: string = 'Search for books'
 
