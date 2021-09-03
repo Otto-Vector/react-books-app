@@ -5,11 +5,14 @@
     font-family: $MaterialFont;
     position: absolute;
     font-size: rem(20);
-    cursor: pointer;
     color: $black-75;
     right: rem(10);
     top: rem(15);
+    cursor: unset;
+    //делает невидимым для кликов мыши
+    pointer-events: none;
 }
+
 //позволяет передавать все разновидности placeholder()
 @mixin placeholder {
   &::placeholder {@content; opacity: .5;}
