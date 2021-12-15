@@ -5,25 +5,27 @@ import {Dropdown, DropdownProps} from "../dropdown/dropdown";
 
 export class InputForm extends React.Component{
 
-    dropdown : DropdownProps[] = [
-        {
+    dropdown: DropdownProps[] = [
+        {//первая кнопка
             labelText: 'Categories',
             selectValues: [
-                { value : 'all', text: 'all'},
-                { value : 'art', text: 'art'},
-                { value : 'biography', text: 'biography'},
-                { value : 'computers', text: 'computers'},
-                { value : 'history', text: 'history'},
-                { value : 'medical', text: 'medical'},
-                { value : 'poetry', text: 'poetry'},
-            ]
+                {value: 'all', text: 'all'},
+                {value: 'art', text: 'art'},
+                {value: 'biography', text: 'biography'},
+                {value: 'computers', text: 'computers'},
+                {value: 'history', text: 'history'},
+                {value: 'medical', text: 'medical'},
+                {value: 'poetry', text: 'poetry'},
+            ],
+            defaultValue: 'art'
         },
-        {
+        {//вторая кнопка
             labelText: 'Sorting by',
             selectValues: [
-                { value : 'relevance', text: 'relevance'},
-                { value : 'newest', text: 'newest'},
-            ]
+                {value: 'relevance', text: 'relevance'},
+                {value: 'newest', text: 'newest'},
+            ],
+            defaultValue: 'newest'
         }
     ]
 
@@ -39,7 +41,6 @@ export class InputForm extends React.Component{
                 </div>
                 <div className={classes.dropdownRight}>
                     <Dropdown {...this.dropdown[1]} />
-                    <Dropdown />
                 </div>
             </div>
         </form>
