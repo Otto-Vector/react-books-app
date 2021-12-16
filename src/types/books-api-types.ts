@@ -68,5 +68,16 @@ export type BooksApiResponseType = {
 }
 
 // types for forms
-export type sortingByType = 'newest' | 'relevance'
-export type categoriesType = 'all' | 'art' | 'biography' | 'computers' | 'history' | 'medical' | 'poetry'
+export type SortingByType = 'newest' | 'relevance'
+export type CategoriesType = 'all' | 'art' | 'biography' | 'computers' | 'history' | 'medical' | 'poetry'
+export type PaginationType = {
+  startIndex: number
+  maxResults: number
+}
+
+
+export type BooksRequest = {
+  bookName: string
+  categories: CategoriesType
+  sortingBy: SortingByType
+}

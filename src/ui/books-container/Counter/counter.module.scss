@@ -1,0 +1,11 @@
+@import "src/styles/variables";
+@import "src/styles/mixins";
+
+.header {
+  @include flex-center(column);
+  padding: rem(20);
+  font-size: rem(20);
+  font-weight: bold;
+  text-align: center;
+  color: black;
+}

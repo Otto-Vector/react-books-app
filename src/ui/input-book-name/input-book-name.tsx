@@ -1,5 +1,4 @@
 import React, {MouseEventHandler} from "react";
-// import './input-book-name.scss'
 import classes from './input-book-name.module.scss'
 
 

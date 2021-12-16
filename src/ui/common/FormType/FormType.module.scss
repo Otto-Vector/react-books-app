@@ -1,0 +1,59 @@
+
+
+.wrapper {
+    box-sizing: border-box;
+    position: relative;
+    width: 100%;
+    height: 100%;
+    border-radius: inherit;
+}
+
+.textarea {
+    box-sizing: border-box;
+    width: 100%;
+    height: 100%;
+    background-color: inherit;
+    border-radius: inherit;
+    resize: none;
+    padding: 3% 2%;
+
+    &:focus {
+        background-color: lightblue;
+    }
+}
+
+.error {
+    border: 1px solid red;
+}
+
+.span {
+    position: absolute;
+    bottom: -15px;
+    left: 5px;
+    font-size: 70%;
+    color: red;
+    font-weight: bold;
+    background-image: radial-gradient(rgba(255,255,255,1), rgba(255,255,255,0.1));
+    border-radius: 5px;
+}
+
+.resetButton{
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    width: 10px;
+    height: 10px;
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' height='24' viewBox='0 0 24 24' width='24'%3e%3cpath d='M0 0h24v24H0z' fill='none'/%3e%3cpath d='M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z'/%3e%3c/svg%3e");
+    background-position: center center;
+    background-repeat: no-repeat;
+    opacity: 0;
+    transform: scale3d(0,0,0);
+    /*сначала немного увеличивается, потом исчезает*/
+    transition: all cubic-bezier(0.68, -0.75, 0.265, 1.55) .3s;
+}
+
+.textarea:focus + .resetButton {
+    opacity: .6;
+    cursor: pointer;
+    transform: scale3d(1,1,1);
+}

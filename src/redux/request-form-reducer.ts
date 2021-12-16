@@ -1,6 +1,6 @@
 import {ThunkAction} from "redux-thunk";
 import {AppStateType, GetActionsTypes} from "./redux-store";
-import {categoriesType, itemBook, sortingByType} from "../types/books-api-types";
+import {BooksRequest, itemBook, PaginationType} from "../types/books-api-types";
 import {getBooksFromApi} from "../api/books-api";
 
 
@@ -8,7 +8,8 @@ const initialState = {
   books: [] as itemBook[],
   totalBooks: 0,
   isFetching: true,
-  booksToView: 4
+  booksToView: 10, //максимум - 40
+  startIndex: 0
 }
 
 export type requestFormReducerStateType = typeof initialState
@@ -64,7 +65,10 @@ export const usersActions = {
     type: 'request-form-reducer/TOGGLE-IS-FETCHING',
     isFetching
   } as const),
-
+  nextPage: (startIndex: number) => ({
+    type: 'request-form-reducer/NEXT-PAGE',
+    startIndex
+  } as const),
 }
 
 /* САНКИ */
@@ -72,12 +76,17 @@ export const usersActions = {
 export type UsersReducerThunkActionType<R = void> = ThunkAction<Promise<R>, AppStateType, unknown, ActionsType>
 
 // запрос на API и запись в стейт значений поиска книг
-export const getBooks = (bookName: string, categories: categoriesType, sortingBy: sortingByType): UsersReducerThunkActionType =>
-  async (dispatch) => {
+export const getBooks = (searchForm: BooksRequest): UsersReducerThunkActionType =>
+  async (dispatch,getState) => {
 
     dispatch(usersActions.toggleIsFetching(true))
 
-    const response = await getBooksFromApi(bookName,categories,sortingBy)
+    let pagination: PaginationType = {
+      startIndex: getState().requestFormReducer.startIndex,
+      maxResults: getState().requestFormReducer.booksToView
+    }
+
+    const response = await getBooksFromApi(searchForm,pagination)
 
     dispatch(usersActions.setBooks(response.items))
 
