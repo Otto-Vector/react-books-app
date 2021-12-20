@@ -29,7 +29,7 @@ const SearchForm: React.FC<OwnProps> = ({onSubmit}) => {
       initialValues={ {
         bookName: '',
         categories: 'all',
-        sortingBy: 'newest'
+        sortingBy: 'relevance'
       } as BooksRequest }
       render={
         ({submitError, handleSubmit, pristine, form, submitting, values}) => (

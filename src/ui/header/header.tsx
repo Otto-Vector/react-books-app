@@ -4,7 +4,7 @@ import bgBooks from "../../images/bg_books.jpg";
 import {InputForm} from "../input-form/input-form";
 import SearchForm from "./search-form/search-form";
 import {BooksRequest} from "../../types/books-api-types";
-import {getBooks} from "../../redux/request-form-reducer";
+import {getBooks, requestFormActions} from "../../redux/request-form-reducer";
 import {AppStateType} from "../../redux/redux-store";
 import {connect} from "react-redux";
 
@@ -19,15 +19,17 @@ type MapStatePropsType = {
 
 type MapDispatchType = {
   getBooks: (searchForm: BooksRequest) => void
+  nextPage: (startIndex: number) => void
 }
 
 type OwnProps = {}
 
 type HeaderContainerType = MapStatePropsType & MapDispatchType & OwnProps
 
-const Header: React.FC<HeaderContainerType> = ({getBooks}) => {
+const Header: React.FC<HeaderContainerType> = ({getBooks, nextPage}) => {
     let headerText = 'Search for books'
     let onSubmit = async (searchForm:BooksRequest)=> {
+        await nextPage(0)
         await getBooks(searchForm)
     }
         return (
@@ -48,6 +50,8 @@ const mapStateToProps = (state: AppStateType): MapStatePropsType => {
       isFetching: state.requestFormReducer.isFetching
   }
 }
-
+let {nextPage} = requestFormActions
 export default connect<MapStatePropsType, MapDispatchType, OwnProps, AppStateType>(mapStateToProps, {
-  getBooks})(Header)
+  getBooks,
+  nextPage
+})(Header)

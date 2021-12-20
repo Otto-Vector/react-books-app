@@ -11,7 +11,6 @@ export const getBooksFromApi = ({bookName, categories, sortingBy}: BooksRequest,
                                 {startIndex = 0, maxResults = 10}: PaginationType) => {
   let subject = (categories === 'all') ? '' : `+subject:${ categories }`
   return instance.get<BooksApiResponseType>(
-    `volumes?q=${ bookName }${ subject }&orderBy=${ sortingBy }
-    &startIndex=${ startIndex }&maxResults=${ maxResults }&projection=lite&key=${ API_KEY }`)
+    `volumes?q=${ bookName }${ subject }&orderBy=${ sortingBy }&startIndex=${ startIndex }&maxResults=${ maxResults }&projection=lite&langRestrict=ru&key=${ API_KEY }`)
     .then(response => response.data)
 }

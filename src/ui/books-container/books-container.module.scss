@@ -1,0 +1,25 @@
+@import "src/styles/variables";
+@import "src/styles/mixins";
+
+.wrapper {
+  @include flex-center();
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: stretch;
+
+}
+
+.bottomWrapper {
+  @include flex-center(column);
+  width: 100%;
+  .button {
+    padding: rem(10);
+    background-color: orange;
+    color: black;
+    width: rem(90);
+
+    &:disabled {
+      opacity: .3;
+    }
+  }
+}

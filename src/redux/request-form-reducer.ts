@@ -7,14 +7,15 @@ import {getBooksFromApi} from "../api/books-api";
 const initialState = {
   books: [] as itemBook[],
   totalBooks: 0,
-  isFetching: true,
-  booksToView: 10, //максимум - 40
-  startIndex: 0
+  isFetching: false,
+  booksToView: 8, //максимум - 40
+  startIndex: 0,
+  request: {} as BooksRequest
 }
 
 export type requestFormReducerStateType = typeof initialState
 
-type ActionsType = GetActionsTypes<typeof usersActions>
+type ActionsType = GetActionsTypes<typeof requestFormActions>
 
 const requestFormReducer = (state = initialState, action: ActionsType): requestFormReducerStateType => {
 
@@ -27,9 +28,11 @@ const requestFormReducer = (state = initialState, action: ActionsType): requestF
       }
     }
     case "request-form-reducer/SET-BOOKS": {
+      let books = (state.startIndex === 0) ? action.books : [...state.books, ...action.books]
+      // if (books === undefined) books = []
       return {
         ...state,
-        books: action.books
+        books: (books === undefined)? [] : books
       }
     }
     case "request-form-reducer/SET-TOTAL-BOOKS-COUNT": {
@@ -38,7 +41,18 @@ const requestFormReducer = (state = initialState, action: ActionsType): requestF
         totalBooks: action.totalBooks
       }
     }
-
+    case "request-form-reducer/NEXT-PAGE": {
+      return {
+        ...state,
+        startIndex: action.startIndex
+      }
+    }
+    case "request-form-reducer/SAVE-REQUEST": {
+      return {
+        ...state,
+        request: action.request
+      }
+    }
     default: {
       return state
     }
@@ -48,7 +62,7 @@ const requestFormReducer = (state = initialState, action: ActionsType): requestF
 
 /* ЭКШОНЫ USERS */
 
-export const usersActions = {
+export const requestFormActions = {
 
   // установка значения в карточки пользователей одной страницы
   setBooks: (books: itemBook[]) => ({
@@ -69,6 +83,10 @@ export const usersActions = {
     type: 'request-form-reducer/NEXT-PAGE',
     startIndex
   } as const),
+  saveRequest: (request: BooksRequest) => ({
+    type: 'request-form-reducer/SAVE-REQUEST',
+    request
+  } as const),
 }
 
 /* САНКИ */
@@ -76,23 +94,27 @@ export const usersActions = {
 export type UsersReducerThunkActionType<R = void> = ThunkAction<Promise<R>, AppStateType, unknown, ActionsType>
 
 // запрос на API и запись в стейт значений поиска книг
-export const getBooks = (searchForm: BooksRequest): UsersReducerThunkActionType =>
-  async (dispatch,getState) => {
+export const getBooks = (searchForm?: BooksRequest): UsersReducerThunkActionType =>
+  async (dispatch, getState) => {
 
-    dispatch(usersActions.toggleIsFetching(true))
+    dispatch(requestFormActions.toggleIsFetching(true))
 
-    let pagination: PaginationType = {
+    const pagination: PaginationType = {
       startIndex: getState().requestFormReducer.startIndex,
-      maxResults: getState().requestFormReducer.booksToView
+      maxResults: getState().requestFormReducer.booksToView,
     }
 
-    const response = await getBooksFromApi(searchForm,pagination)
+    if (searchForm) dispatch(requestFormActions.saveRequest(searchForm))
+    if (pagination.startIndex===0) dispatch(requestFormActions.setBooks([]))
+    try {
+      const response = await getBooksFromApi(getState().requestFormReducer.request, pagination)
+      dispatch(requestFormActions.setBooks(response.items))
+      dispatch(requestFormActions.setTotalBooksCount(response.totalItems))
+    } catch (e) {
+      console.log("Error from API is: ", e)
+    }
 
-    dispatch(usersActions.setBooks(response.items))
-
-    dispatch(usersActions.setTotalBooksCount(response.totalItems))
-
-    dispatch(usersActions.toggleIsFetching(false))
+    dispatch(requestFormActions.toggleIsFetching(false))
   }
 
 
