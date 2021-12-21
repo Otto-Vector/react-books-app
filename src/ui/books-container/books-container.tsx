@@ -4,25 +4,18 @@ import anyBookImage from '../../images/AnyBook.jpg'
 import {connect} from "react-redux";
 
 import {AppStateType} from "../../redux/redux-store";
-import {BooksRequest, itemBook} from "../../types/books-api-types";
-// import {getBooks} from "../../redux/request-form-reducer";
+import {BooksRequest} from "../../types/books-api-types";
 import Counter from "./Counter/Counter";
 import Preloader from "../common/preloader/Preloader";
 import {BookCard} from "./book-card/book-card";
 import {getBooks, requestFormActions} from "../../redux/request-form-reducer";
 
 type MapStatePropsType = ReturnType<typeof mapStateToProps>
-//   {
-//   books: itemBook[]
-//   isFetching: boolean
-//   totalBooks: number
-//   booksToView: number
-// }
+
 
 type MapDispatchType = {
   nextPage: (startIndex: number) => void
   getBooks: (searchForm?: BooksRequest) => void
-  // getBooks: (bookName: string, categories: CategoriesType, sortingBy: SortingByType) => void
 }
 
 type OwnProps = {}
@@ -61,7 +54,7 @@ const BooksContainer: React.FC<BooksContainerType> = (
       <div className={classes.bottomWrapper}>
         { isFetching && <Preloader/> }
         <button className={classes.button}
-                disabled={books.length===0||isFetching||currentPage===totalPages}
+                disabled={books.length===0||isFetching||(currentPage+1===totalPages)}
                 onClick={nextPages}
         >Load more</button>
       </div>
@@ -79,7 +72,7 @@ const mapStateToProps = (state: AppStateType) => {
   }
 }
 
-let {nextPage} = requestFormActions
+const {nextPage} = requestFormActions
 
 export default connect<MapStatePropsType, MapDispatchType, OwnProps, AppStateType>(mapStateToProps, {
   nextPage,

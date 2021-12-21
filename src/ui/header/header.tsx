@@ -1,7 +1,6 @@
 import React from 'react';
 import classes from './header.module.scss'
 import bgBooks from "../../images/bg_books.jpg";
-import {InputForm} from "../input-form/input-form";
 import SearchForm from "./search-form/search-form";
 import {BooksRequest} from "../../types/books-api-types";
 import {getBooks, requestFormActions} from "../../redux/request-form-reducer";
@@ -36,7 +35,6 @@ const Header: React.FC<HeaderContainerType> = ({getBooks, nextPage}) => {
         <header style={ headerStyle } className={ classes.header }>
             <h1 className={ classes.head }>{ headerText }</h1>
             <div className={ classes.inputForm}>
-                <InputForm/>
                 <SearchForm onSubmit={onSubmit}/>
             </div>
         </header>
