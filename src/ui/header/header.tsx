@@ -6,7 +6,7 @@ import { BooksRequest } from '../../types/books-api-types'
 import { getBooks, requestFormActions } from '../../redux/request-form-reducer'
 import { AppStateType } from '../../redux/redux-store'
 import { connect } from 'react-redux'
-import { useHistory } from 'react-router-dom'
+import { useNavigate  } from 'react-router-dom'
 
 const headerStyle: React.CSSProperties = {
     'backgroundImage': `linear-gradient(90deg, #00000020, #00000080), url(${ bgBooks })`,
@@ -29,11 +29,12 @@ type HeaderContainerType = MapStatePropsType & MapDispatchType & OwnProps
 const Header: React.FC<HeaderContainerType> = ( { getBooks, nextPage } ) => {
     const headerText = 'Search for books'
 
-    const history = useHistory()
+    const navigate = useNavigate()
+
 
     const onSubmit = async ( searchForm: BooksRequest ) => {
         // toDo: add routes const manager
-        history.push('/search')
+        navigate('/search')
         await nextPage( 0 )
         await getBooks( searchForm )
     }

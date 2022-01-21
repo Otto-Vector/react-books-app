@@ -1,0 +1,42 @@
+@import "src/styles/variables";
+@import "src/styles/mixins";
+
+.container {
+  display: flex;
+  background-color: whitesmoke;
+  //max-width: rem(1000);
+  //min-width: rem(300);
+  text-align: center;
+  padding: rem(20);
+  box-shadow: black rem(7) rem(7) rem(8);
+  margin: rem(25) auto;
+}
+
+.side {
+  margin: rem(5);
+  min-width: 40%;
+}
+
+.image {
+  width: 50%;
+  margin: rem(15) 0;
+  box-shadow: black rem(5) rem(5) rem(3);
+}
+
+.category {
+  text-align: left;
+  padding-top: rem(10);
+  text-decoration-line: underline;
+}
+
+.bookName {
+    text-align: left;
+  padding-top: rem(5);
+  font-weight: bold;
+}
+
+.authors {
+    text-align: left;
+  padding-top: rem(7);
+  color: gray;
+}

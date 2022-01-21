@@ -8,7 +8,7 @@ const initialState = {
     books: [] as itemBook[],
     totalBooks: 0,
     isFetching: false,
-    booksToView: 8, //максимум - 40
+    booksToView: 30, //максимум - 40
     startIndex: 0,
     request: {} as BooksRequest,
     selectProps: {
