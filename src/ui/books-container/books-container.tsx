@@ -24,12 +24,13 @@ type BooksContainerType = MapStatePropsType & MapDispatchType & OwnProps
 
 const BooksContainer: React.FC<BooksContainerType> = (
     { books, totalBooks, booksToView, startIndex, isFetching, nextPage, getBooks } ) => {
-    let totalPages = Math.ceil( totalBooks / booksToView )
+
+    const totalPages = Math.ceil( totalBooks / booksToView )
     const [ currentPage, incrementCurrentPage ] = useState( 0 )
 
     const nextPages = () => {
         incrementCurrentPage( currentPage + 1 )
-        let currentIndex = (currentPage + 1) * booksToView
+        const currentIndex = (currentPage + 1) * booksToView
         nextPage( currentIndex )
         getBooks()
     }

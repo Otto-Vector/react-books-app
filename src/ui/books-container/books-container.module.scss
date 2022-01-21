@@ -17,6 +17,7 @@
     background-color: orange;
     color: black;
     width: rem(90);
+    cursor: pointer;
 
     &:disabled {
       opacity: .3;
