@@ -9,6 +9,7 @@ import Counter from './Counter/Counter'
 import Preloader from '../common/preloader/Preloader'
 import { BookCard } from './book-card/book-card'
 import { getBooks, requestFormActions } from '../../redux/request-form-reducer'
+import { Button } from '../common/Button/Button'
 
 type MapStatePropsType = ReturnType<typeof mapStateToProps>
 
@@ -57,11 +58,11 @@ const BooksContainer: React.FC<BooksContainerType> = (
             </div>
             <div className={ classes.bottomWrapper }>
                 { isFetching && <Preloader/> }
-                <button className={ classes.button }
-                        disabled={ books.length === 0 || isFetching || (currentPage + 1 === totalPages) }
-                        onClick={ nextPages }
-                >Load more
-                </button>
+                <Button disabled={ books.length === 0 || isFetching || (currentPage + 1 === totalPages) }
+                        onclick={ nextPages }
+                        text={ 'Load more' }
+                        mode={ 'Orange' }
+                />
             </div>
         </div>
     )

@@ -6,21 +6,10 @@
   flex-wrap: wrap;
   justify-content: space-around;
   align-items: stretch;
-
 }
 
 .bottomWrapper {
   @include flex-center(column);
   width: 100%;
-  .button {
-    padding: rem(10);
-    background-color: orange;
-    color: black;
-    width: rem(90);
-    cursor: pointer;
-
-    &:disabled {
-      opacity: .3;
-    }
-  }
+  padding-bottom: rem(15);
 }

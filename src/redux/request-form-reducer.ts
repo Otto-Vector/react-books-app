@@ -13,7 +13,7 @@ const initialState = {
     request: {} as BooksRequest,
     selectProps: {
         categories: [ 'all', 'art', 'biography', 'computers', 'history', 'medical', 'poetry' ],
-        sortingBy: [ 'relevance', 'newest' ],
+        orderBy: [ 'relevance', 'newest' ],
     },
 }
 

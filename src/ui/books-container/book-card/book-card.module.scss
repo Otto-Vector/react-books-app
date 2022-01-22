@@ -3,16 +3,16 @@
 
 .container {
   background-color: whitesmoke;
-  width: 22%;
+  flex: 0 1 rem(300);
   text-align: center;
-  padding: rem(20);
+  padding: rem(15);
   box-shadow: black rem(7) rem(7) rem(8);
   margin-bottom: rem(25);
 }
 
 .image {
-  width: 90%;
-  margin: rem(15) 0;
+  height: rem(300);
+  margin: rem(10) 0;
   box-shadow: black rem(5) rem(5) rem(3);
 }
 

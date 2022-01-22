@@ -11,24 +11,26 @@ export const BookInfo: React.FC = () => {
     // вытаскиваем значение роутера
     const { bookId } = useParams<{ bookId: string }>()
     const books = useSelector( ( state: AppStateType ) => state.requestFormReducer.books )
-    const [ book, setBook ] = useState( books[0] )
+    const [ { imageLinks, categories, title, authors, description }, setBook ] = useState( books[0].volumeInfo )
 
-    const localBookById = (): itemBook[] => {
-        return books.filter( ( item ) => item.id === bookId )
+    const localBookById = (): itemBook['volumeInfo'] => {
+        return books.filter( ( item ) => item.id === bookId )[0].volumeInfo
     }
+
     useEffect( () => {
-        setBook( localBookById()[0] )
+        setBook( localBookById() )
+        console.log(books)
     }, [] )
 
     return (<div className={ classes.container }>
             <div className={ classes.side }>
-                <img className={ classes.image } alt={ 'bookName' } src={ book.volumeInfo.imageLinks.thumbnail }/>
+                <img className={ classes.image } alt={ 'bookName' } src={ imageLinks.thumbnail }/>
             </div>
             <div className={ classes.side }>
-                <div className={ classes.category }>{ book.volumeInfo.categories }</div>
-                <div className={ classes.bookName }>{ book.volumeInfo.title }</div>
-                <p className={ classes.authors }>{ book.volumeInfo.authors }</p>
-                <p className={ classes.authors }>{ book.volumeInfo.description }</p>
+                <div className={ classes.category }>{ categories }</div>
+                <div className={ classes.bookName }>{ title }</div>
+                <p className={ classes.authors }>{ authors }</p>
+                <p className={ classes.authors }>{ description }</p>
             </div>
         </div>
     )

@@ -1,5 +1,6 @@
 import axios from 'axios'
 import { BooksApiResponseType, BooksRequest, PaginationType } from '../types/books-api-types'
+import * as queryString from 'querystring'
 
 const instance = axios.create( {
     baseURL: 'https://www.googleapis.com/books/v1/',
@@ -7,12 +8,31 @@ const instance = axios.create( {
 
 const API_KEY = 'AIzaSyAYL_h8bTjemmcHhKGtf2V9-CtalYYMT04'
 
-export const getBooksFromApi = ( { bookName, categories, sortingBy }: BooksRequest,
+export const getBooksFromApi = ( { bookName, categories, orderBy }: BooksRequest,
                                  { startIndex = 0, maxResults = 30 }: PaginationType ) => {
     const subject = (categories === 'all') ? '' : `+subject:${ categories }`
-    // const intitle = `+intitle:${ bookName }`
-    const language = '&langRestrict=ru'
+    const q = `${bookName}${subject}`
+    const projection: 'full' | 'lite' = 'full'
+    const langRestrict: 'ru' | 'en' = 'ru'
+
+    // создаём объект для query,
+    const query = Object.fromEntries( Object
+        .entries( {
+            q,
+            orderBy,
+            startIndex,
+            maxResults,
+            projection,
+            langRestrict,
+            key: API_KEY,
+        } )
+        // чистим пустые значения
+        .filter( n => n[1] !== '' )
+        .filter( n => n[1] !== undefined ),
+    )
+
     return instance.get<BooksApiResponseType>(
-        `volumes?q=${ bookName }${ subject }&orderBy=${ sortingBy }&startIndex=${ startIndex }&maxResults=${ maxResults }&projection=full${ language }&key=${ API_KEY }` )
+        `volumes?${ queryString.stringify( query ) }` )
         .then( response => response.data )
+
 }

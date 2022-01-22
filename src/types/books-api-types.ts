@@ -79,5 +79,5 @@ export type PaginationType = {
 export type BooksRequest = {
   bookName: string
   categories: CategoriesType
-  sortingBy: SortingByType
+  orderBy: SortingByType
 }

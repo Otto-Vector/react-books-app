@@ -5,6 +5,8 @@ import { Field, Form } from 'react-final-form'
 import { Input } from '../../common/FormType/FormType'
 import { composeValidators, required } from '../../../utils/validators'
 import { BooksRequest } from '../../../types/books-api-types'
+import { useSelector } from 'react-redux'
+import { AppStateType } from '../../../redux/redux-store'
 
 
 type OwnProps = {
@@ -12,17 +14,16 @@ type OwnProps = {
 }
 
 const SearchForm: React.FC<OwnProps> = ( { onSubmit } ) => {
-    const selectProps = {
-        categories: [ 'all', 'art', 'biography', 'computers', 'history', 'medical', 'poetry' ],
-        sortingBy: [ 'relevance', 'newest' ],
-    }
+
+    const selectProps = useSelector( ( state: AppStateType ) => state.requestFormReducer.selectProps )
+
     return (
         <Form
             onSubmit={ onSubmit }
             initialValues={ {
                 bookName: '',
                 categories: 'all',
-                sortingBy: 'relevance',
+                orderBy: 'relevance',
             } as BooksRequest }
             render={
                 ( { submitError, handleSubmit, pristine, form, submitting, values } ) => (
@@ -45,8 +46,8 @@ const SearchForm: React.FC<OwnProps> = ( { onSubmit } ) => {
                             </div>
                             <div className={ styles.dropdown }>
                                 <label className={ styles.label }>{ 'Sorting by' }</label>
-                                <Field className={ styles.select } name={ 'sortingBy' } component={ 'select' }>
-                                    { selectProps.sortingBy.map( value =>
+                                <Field className={ styles.select } name={ 'orderBy' } component={ 'select' }>
+                                    { selectProps.orderBy.map( value =>
                                         <option value={ value } key={ value }>{ value }</option> )
                                     }
                                 </Field>
