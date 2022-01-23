@@ -116,7 +116,7 @@ export const getBooks = ( searchForm?: BooksRequest ): UsersReducerThunkActionTy
             dispatch( requestFormActions.setBooks( response.items ) )
             dispatch( requestFormActions.setTotalBooksCount( response.totalItems ) )
         } catch (e) {
-            console.log( 'Error from API is: ', e )
+            alert( 'Error from API is: ' + e )
         }
         // окончание отображение статуса обработки запроса
         dispatch( requestFormActions.toggleIsFetching( false ) )

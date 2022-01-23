@@ -8,6 +8,7 @@ import {
     Routes,
 } from 'react-router-dom'
 import { BookInfo } from './BookInfo/book-info'
+import GoTopButton from './common/GoTopButton/GoTopButton'
 
 export const UiComponent: React.FC = () => {
 
@@ -22,6 +23,7 @@ export const UiComponent: React.FC = () => {
                     <Route path='*' element={ <h1>This site NOT FOUND. Try another address</h1> }/>
                 </Routes>
             </div>
+            <GoTopButton/>
         </section>
     )
 }

@@ -1,0 +1,38 @@
+@import "src/styles/variables";
+@import "src/styles/mixins";
+
+$shadowColor: rgba(black, 0.5);
+
+.goTopHidden {
+    display: none;
+}
+
+.goTop {
+    background-color: transparent;
+    text-align: center;
+
+    &Icon {
+        @include flex-center();
+        @include size(rem(35));
+        position: fixed;
+        right: rem(40);
+        bottom: rem(40);
+
+        font-family: $MaterialFont;
+        font-size: rem(20);
+        line-height: 200%;
+
+        background: rgba(252, 248, 241, .8);
+        box-shadow: 2px 2px 5px $shadowColor;
+        border-radius: 50%;
+
+        cursor: pointer;
+        transition: all 0.2s ease-in-out;
+
+        &:hover {
+            transform: translateY(-5%);
+            box-shadow: 1px 1px 3px $shadowColor;
+        }
+    }
+
+}
