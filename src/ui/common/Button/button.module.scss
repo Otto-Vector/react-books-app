@@ -1,50 +1,55 @@
 @import "src/styles/variables";
 @import "src/styles/mixins";
 
-$btnBlueFontColor        : #3A79FF;
-$btnBlueBgColor          : #d2e1ff;
-$btnWhiteFontColor       : #676e87;
-$btnWhiteBgColor         : #FFFFFF;
-$btnPinkFontColor        : #D43F3F;
-$btnPingBgColor          : #FFD7D7;
-$btnGrayFontColor        : #7382A3;
-$btnGrayBgColor          : #E8ECF4;
-$btnNoFillFontColor      : #C7D3FF;
-$btnNoFillBgColor        : transparent;
-$btnNoFillBorderColor    : #A0B4FF;
+$btnBlueFontColor: #3A79FF;
+$btnBlueBgColor: #d2e1ff;
+$btnWhiteFontColor: #676e87;
+$btnWhiteBgColor: #FFFFFF;
+$btnPinkFontColor: #D43F3F;
+$btnPingBgColor: #FFD7D7;
+$btnGrayFontColor: #7382A3;
+$btnGrayBgColor: #E8ECF4;
+$btnNoFillFontColor: #C7D3FF;
+$btnNoFillBgColor: transparent;
+$btnNoFillBorderColor: #A0B4FF;
 
 .button {
-    padding: rem(10);
-    border-radius: 2px;
+  padding: rem(10);
+  border-radius: 2px;
+  border: 1px solid transparent;
 
-    font-family: $Quicksand;
-    font-style: normal;
-    font-weight: bold;
-    font-size: rem(13);
-    line-height: rem(16.25);
+  font-family: $Quicksand;
+  font-style: normal;
+  font-weight: bold;
+  font-size: rem(13);
+  line-height: rem(16.25);
 
-    white-space: nowrap;
-    user-select: none;
-    cursor: pointer;
-    transition: all 0.2s ease-in-out;
+  white-space: nowrap;
+  user-select: none;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
 
-    &:first-letter {
-      text-transform: uppercase;
-    }
+  &:first-letter {
+    text-transform: uppercase;
+  }
 
-    &:hover {
-      transform: translateY(-1px);
-      box-shadow: 0 4px 10px rgba( 0, 0, 0, 35%);
-    }
+  &:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 35%);
+  }
 
-    &:active {
-      transform: translateY(0);
-      box-shadow: 0 1px 5px rgba(0, 0, 0, 35%);
-    }
+  &:active {
+    transform: translateY(0);
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 35%);
+  }
 
-    &:disabled {
-      opacity: .3;
-    }
+  &:disabled {
+    opacity: .3;
+  }
+
+  &:focus {
+    border-color: black;
+  }
 
   &Orange {
     background-color: orange;
@@ -55,19 +60,23 @@ $btnNoFillBorderColor    : #A0B4FF;
     background-color: $btnBlueBgColor;
     color: $btnBlueFontColor;
   }
+
   &Pink {
     background-color: $btnPingBgColor;
     color: $btnPinkFontColor;
   }
+
   &Gray {
     font-weight: 500;
     background-color: $btnGrayBgColor;
     color: $btnGrayFontColor;
   }
+
   &White {
     background-color: $btnWhiteBgColor;
     color: $btnWhiteFontColor;
   }
+
   &NoFill {
     padding: rem(12) rem(15);
     font-weight: 500;
@@ -75,4 +84,4 @@ $btnNoFillBorderColor    : #A0B4FF;
     color: $btnNoFillFontColor;
     border: 1px solid $btnNoFillBorderColor;
   }
-  }
+}

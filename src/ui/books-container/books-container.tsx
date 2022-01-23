@@ -57,11 +57,10 @@ const BooksContainer: React.FC<BooksContainerType> = (
                 } ) }
             </div>
             <div className={ classes.bottomWrapper }>
-                { isFetching && <Preloader/> }
                 <Button disabled={ books.length === 0 || isFetching || (currentPage + 1 === totalPages) }
                         onClick={ nextPages }
                         mode={ 'Orange' }
-                >{ 'Load more' }</Button>
+                >{ isFetching ? <Preloader/> : 'Load more' }</Button>
             </div>
         </div>
     )

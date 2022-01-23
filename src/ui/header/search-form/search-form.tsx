@@ -56,14 +56,12 @@ const SearchForm: React.FC<OwnProps> = ( { onSubmit } ) => {
                         </div>
                         <div className={styles.buttonsPanel}>
                             <Button type={'submit'} disabled={submitting} mode={'White'}>Done</Button>
-                        <button type={ 'reset' }
-                                className={ styles.button }
+                        <Button type={ 'reset' }
                                 disabled={ pristine || submitting }
-                                onClick={ ( e ) => {
-                                    form.reset()
-                                } }
+                                onClick={ () => {form.reset()} }
+                                mode={'Gray'}
                         >X
-                        </button>
+                        </Button>
                             </div>
                         { submitError && <span className={ styles.onError }>{ submitError }</span> }
                     </form>
