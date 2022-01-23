@@ -39,31 +39,35 @@ const BooksContainer: React.FC<BooksContainerType> = (
     return (<div>
             <Counter totalBooks={ totalBooks }/>
             <div className={ classes.wrapper }>
-                { (books.length !== 0) && books.map( (
-                    {
-                        id,
-                        volumeInfo: {
-                            imageLinks, categories, title, authors,
-                        },
-                    } ) => {
-                    let imageUrl = imageLinks ? (imageLinks.thumbnail || imageLinks.smallThumbnail) : anyBookImage
-                    return <BookCard key={ id }
-                                     id={ id }
-                                     imageUrl={ imageUrl }
-                                     category={ categories }
-                                     title={ title }
-                                     authors={ authors }
-                    />
-                } ) }
+                { (books.length !== 0)
+                    ? books.map( ( {
+                                       id,
+                                       volumeInfo: {
+                                           imageLinks, categories, title, authors,
+                                       },
+                                   } ) => {
+                        let imageUrl = imageLinks ? (imageLinks.thumbnail || imageLinks.smallThumbnail) : anyBookImage
+                        return <BookCard key={ id }
+                                         id={ id }
+                                         imageUrl={ imageUrl }
+                                         category={ categories }
+                                         title={ title }
+                                         authors={ authors }
+                        />
+                    } )
+                    : isFetching && <Preloader hSize={ '50rem' }/>
+                }
             </div>
+            { (books.length !== 0) &&
             <div className={ classes.bottomWrapper }>
-                <Button disabled={ books.length === 0 || isFetching || (currentPage + 1 === totalPages) }
-                        onClick={ nextPages }
-                        mode={ 'Orange' }
-                >  { isFetching ? <Preloader hSize={ '2rem' }/> : ''}
-                    {' Load more'}
-                </Button>
-            </div>
+              <Button disabled={ isFetching || (currentPage + 1 >= totalPages) }
+                      onClick={ nextPages }
+                      mode={ 'Orange' }
+                      title={ `${ totalBooks - books.length } more` }
+              >  { isFetching && <Preloader hSize={ '2rem' }/> }
+                  { ' Load more' }
+              </Button>
+            </div> }
         </div>
     )
 }
