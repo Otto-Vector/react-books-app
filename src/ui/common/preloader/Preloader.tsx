@@ -1,13 +1,18 @@
-import React from "react";
-import styles from "./preloader.module.scss"
-import preLoader from "../../../images/Spinner.svg"
+import React from 'react'
+import styles from './preloader.module.scss'
+import preLoader from '../../../images/Spinner.svg'
 
-const Preloader = () => {
+
+type OwnProps = {
+    hSize?: string
+}
+
+const Preloader: React.FC<OwnProps> = ( { hSize = '100%' } ) => {
 
     return (
-      <div className={styles.preloader}>
-        <img className={styles.image} src={preLoader} alt='preload' />
-      </div>
+        <span className={ styles.preloader } >
+            <img className={ styles.image } style={ { 'height': `${ hSize }` } } src={ preLoader } alt='preload'/>
+        </span>
     )
 }
 
