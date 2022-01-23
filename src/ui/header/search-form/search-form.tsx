@@ -7,6 +7,7 @@ import { composeValidators, required } from '../../../utils/validators'
 import { BooksRequest } from '../../../types/books-api-types'
 import { useSelector } from 'react-redux'
 import { AppStateType } from '../../../redux/redux-store'
+import { Button } from '../../common/Button/Button'
 
 
 type OwnProps = {
@@ -53,7 +54,8 @@ const SearchForm: React.FC<OwnProps> = ( { onSubmit } ) => {
                                 </Field>
                             </div>
                         </div>
-                        <button className={ styles.button } type={ 'submit' } disabled={ submitting }>Done</button>
+                        <div className={styles.buttonsPanel}>
+                            <Button type={'submit'} disabled={submitting} mode={'White'}>Done</Button>
                         <button type={ 'reset' }
                                 className={ styles.button }
                                 disabled={ pristine || submitting }
@@ -62,6 +64,7 @@ const SearchForm: React.FC<OwnProps> = ( { onSubmit } ) => {
                                 } }
                         >X
                         </button>
+                            </div>
                         { submitError && <span className={ styles.onError }>{ submitError }</span> }
                     </form>
                 )

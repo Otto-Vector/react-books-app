@@ -11,14 +11,13 @@ const API_KEY = 'AIzaSyAYL_h8bTjemmcHhKGtf2V9-CtalYYMT04'
 export const getBooksFromApi = ( { bookName, categories, orderBy }: BooksRequest,
                                  { startIndex = 0, maxResults = 30 }: PaginationType ) => {
     const subject = (categories === 'all') ? '' : `+subject:${ categories }`
-    const q = `${bookName}${subject}`
     const projection: 'full' | 'lite' = 'full'
     const langRestrict: 'ru' | 'en' = 'ru'
 
     // создаём объект для query,
     const query = Object.fromEntries( Object
         .entries( {
-            q,
+            q: `${ bookName }${ subject }`,
             orderBy,
             startIndex,
             maxResults,
@@ -31,8 +30,7 @@ export const getBooksFromApi = ( { bookName, categories, orderBy }: BooksRequest
         .filter( n => n[1] !== undefined ),
     )
 
-    return instance.get<BooksApiResponseType>(
-        `volumes?${ queryString.stringify( query ) }` )
+    return instance.get<BooksApiResponseType>( `volumes?${ queryString.stringify( query ) }` )
         .then( response => response.data )
 
 }
