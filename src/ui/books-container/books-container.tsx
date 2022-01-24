@@ -1,39 +1,42 @@
 import React, { useState } from 'react'
 import classes from './books-container.module.scss'
 import anyBookImage from '../../images/AnyBook.jpg'
-import { connect } from 'react-redux'
-
-import { AppStateType } from '../../redux/redux-store'
-import { BooksRequest } from '../../types/books-api-types'
+import { useDispatch, useSelector } from 'react-redux'
 import Counter from './Counter/Counter'
 import Preloader from '../common/preloader/Preloader'
 import { BookCard } from './book-card/book-card'
 import { getBooks, requestFormActions } from '../../redux/request-form-reducer'
 import { Button } from '../common/Button/Button'
+import {
+    getBooksList, getIsFetching,
+    getPagination,
+    getRequestBooks,
+    getTotalBooksNumber,
+} from '../../selectors/request-form-selectors'
 
-type MapStatePropsType = ReturnType<typeof mapStateToProps>
-
-
-type MapDispatchType = {
-    nextPage: ( currentPage: number ) => void
-    nextIndex: ( startIndex: number ) => void
-    getBooks: ( searchForm?: BooksRequest ) => void
-}
+const { nextIndex } = requestFormActions
 
 type OwnProps = {}
 
-type BooksContainerType = MapStatePropsType & MapDispatchType & OwnProps
+export const BooksContainer: React.FC<OwnProps> = () => {
 
-const BooksContainer: React.FC<BooksContainerType> = (
-    { books, totalBooks, booksToView, currentPage, isFetching, nextIndex, nextPage, getBooks } ) => {
+    const { maxResults, startIndex } = useSelector( getPagination )
+    const dispatch = useDispatch()
 
-    const totalPages = Math.ceil( totalBooks / booksToView )
+    const isFetching = useSelector( getIsFetching )
+    const request = useSelector( getRequestBooks )
+    const totalBooks = useSelector( getTotalBooksNumber )
 
-    const nextPages = () => {
-        nextPage( currentPage +1 )
-        const currentIndex = (currentPage + 1) * booksToView
-        nextIndex( currentIndex )
-        getBooks()
+    const books = useSelector(getBooksList)
+
+    const nextPage = () => {
+        const _nextIndex = startIndex + maxResults
+        dispatch( nextIndex( _nextIndex ) )
+        dispatch( getBooks( request, { maxResults, startIndex: _nextIndex } ) )
+    }
+
+    const lastPage = (): boolean => {
+        return (totalBooks-(startIndex+maxResults)) < 0
     }
 
     return (<div>
@@ -60,8 +63,8 @@ const BooksContainer: React.FC<BooksContainerType> = (
             </div>
             { (books.length !== 0) &&
             <div className={ classes.bottomWrapper }>
-              <Button disabled={ isFetching || (currentPage + 1 > totalPages) }
-                      onClick={ nextPages }
+              <Button disabled={ isFetching || lastPage() }
+                      onClick={ nextPage }
                       mode={ 'Orange' }
                       title={ `${ totalBooks - books.length } more` }
               >  { isFetching && <Preloader hSize={ '2rem' }/> }
@@ -71,21 +74,3 @@ const BooksContainer: React.FC<BooksContainerType> = (
         </div>
     )
 }
-
-const mapStateToProps = ( state: AppStateType ) => {
-    return {
-        books: state.requestFormReducer.books,
-        isFetching: state.requestFormReducer.isFetching,
-        totalBooks: state.requestFormReducer.totalBooks,
-        booksToView: state.requestFormReducer.booksToView,
-        currentPage: state.requestFormReducer.currentPage,
-    }
-}
-
-const { nextPage, nextIndex } = requestFormActions
-
-export default connect<MapStatePropsType, MapDispatchType, OwnProps, AppStateType>( mapStateToProps, {
-    nextPage,
-    nextIndex,
-    getBooks,
-} )( BooksContainer )

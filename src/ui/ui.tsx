@@ -1,7 +1,7 @@
 import React from 'react'
 import classes from './ui.module.scss'
 import { Header } from './header/header'
-import BooksContainer from './books-container/books-container'
+import { BooksContainer } from './books-container/books-container'
 import {
     Navigate,
     Route,

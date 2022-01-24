@@ -8,7 +8,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { getPagination } from '../../selectors/request-form-selectors'
 
-const { setBooks, nextIndex } = requestFormActions
+const { setBooks, nextIndex, saveRequest } = requestFormActions
 
 const headerStyle: React.CSSProperties = {
     // вставил так, пока не знаю как правильно воткнуть ссылку на картинку в bg
@@ -31,6 +31,8 @@ export const Header: React.FC<OwnProps> = () => {
         dispatch( nextIndex( 0 ) )
         // очищаем список книг
         dispatch( setBooks( [] ) )
+        // сохраняем данные запроса
+        dispatch( saveRequest( searchForm ) )
         // отправляем запрос
         dispatch( getBooks( searchForm, { ...pagination, startIndex: 0 } ) )
     }
