@@ -2,7 +2,7 @@ import React from 'react'
 import classes from './button.module.scss'
 
 type OwnProps = {
-    disabled: boolean,
+    disabled?: boolean,
     onClick?: () => void,
     mode?: 'Orange' | 'Blue' | 'Pink' | 'Gray' | 'White' | 'NoFill'
     type?: 'button' | 'submit' | 'reset'

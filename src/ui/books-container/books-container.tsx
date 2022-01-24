@@ -38,6 +38,11 @@ export const BooksContainer: React.FC<OwnProps> = () => {
         return (totalBooks - (startIndex + maxResults)) <= 0
     }
 
+    const booksLeft = (): string => {
+        const total = totalBooks - books.length
+        return `${ total <= 0 ? 0 : total } more`
+    }
+
     return (<div>
             <Counter totalBooks={ totalBooks }/>
             <div className={ classes.wrapper }>
@@ -48,10 +53,9 @@ export const BooksContainer: React.FC<OwnProps> = () => {
                                            imageLinks, categories, title, authors,
                                        },
                                    } ) => {
-                        let imageUrl = imageLinks ? (imageLinks.thumbnail || imageLinks.smallThumbnail) : anyBookImage
                         return <BookCard key={ id }
                                          id={ id }
-                                         imageUrl={ imageUrl }
+                                         imageUrl={ imageLinks?.thumbnail || imageLinks?.smallThumbnail || anyBookImage }
                                          category={ categories }
                                          title={ title }
                                          authors={ authors }
@@ -65,7 +69,7 @@ export const BooksContainer: React.FC<OwnProps> = () => {
               <Button disabled={ isFetching || lastPage() }
                       onClick={ nextPage }
                       mode={ 'Orange' }
-                      title={ `${ totalBooks - books.length } more` }
+                      title={ booksLeft() }
               >  { isFetching && <Preloader hSize={ '2rem' }/> }
                   { ' Load more' }
               </Button>

@@ -20,13 +20,14 @@ const initialState = {
         categories: [ 'all', 'art', 'biography', 'computers', 'history', 'medical', 'poetry' ],
         orderBy: [ 'relevance', 'newest' ],
     },
+    bookIdToView: undefined as undefined | string
 }
 
-export type requestFormReducerStateType = typeof initialState
+export type RequestFormReducerStateType = typeof initialState
 
 type ActionsType = GetActionsTypes<typeof requestFormActions>
 
-const requestFormReducer = ( state = initialState, action: ActionsType ): requestFormReducerStateType => {
+const requestFormReducer = ( state = initialState, action: ActionsType ): RequestFormReducerStateType => {
 
     switch (action.type) {
 
@@ -69,6 +70,12 @@ const requestFormReducer = ( state = initialState, action: ActionsType ): reques
                 request: action.request,
             }
         }
+        case 'request-form-reducer/SET-BOOK-ID-TO-VIEW': {
+            return {
+                ...state,
+                bookIdToView: action.bookIdToView
+            }
+        }
         default: {
             return state
         }
@@ -91,6 +98,10 @@ export const requestFormActions = {
     setTotalBooksCount: ( totalBooks: number ) => ({
         type: 'request-form-reducer/SET-TOTAL-BOOKS-COUNT',
         totalBooks,
+    } as const),
+    setBookIdToView: (bookIdToView: string | undefined) => ({
+        type: 'request-form-reducer/SET-BOOK-ID-TO-VIEW',
+        bookIdToView,
     } as const),
     // ожидание отклика API на запрос поиска пользователей
     toggleIsFetching: ( isFetching: boolean ) => ({
