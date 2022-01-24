@@ -1,6 +1,6 @@
 
 //response type from 'https://www.googleapis.com/books/v1/'
-export type itemBook = {
+export type ItemBook = {
  "kind": string,
       "id": string,
       "etag": string,
@@ -64,20 +64,20 @@ export type itemBook = {
 export type BooksApiResponseType = {
   kind: string,
   totalItems: number
-  items: itemBook[]
+  items: ItemBook[]
 }
 
 // types for forms
 export type SortingByType = 'newest' | 'relevance'
 export type CategoriesType = 'all' | 'art' | 'biography' | 'computers' | 'history' | 'medical' | 'poetry'
-export type PaginationType = {
-  startIndex: number
-  maxResults: number
-}
-
 
 export type BooksRequest = {
   bookName: string
   categories: CategoriesType
   orderBy: SortingByType
+}
+
+export type PaginationType = {
+  startIndex: number
+  maxResults: number
 }

@@ -15,7 +15,8 @@ type MapStatePropsType = ReturnType<typeof mapStateToProps>
 
 
 type MapDispatchType = {
-    nextPage: ( startIndex: number ) => void
+    nextPage: ( currentPage: number ) => void
+    nextIndex: ( startIndex: number ) => void
     getBooks: ( searchForm?: BooksRequest ) => void
 }
 
@@ -24,15 +25,14 @@ type OwnProps = {}
 type BooksContainerType = MapStatePropsType & MapDispatchType & OwnProps
 
 const BooksContainer: React.FC<BooksContainerType> = (
-    { books, totalBooks, booksToView, startIndex, isFetching, nextPage, getBooks } ) => {
+    { books, totalBooks, booksToView, currentPage, isFetching, nextIndex, nextPage, getBooks } ) => {
 
     const totalPages = Math.ceil( totalBooks / booksToView )
-    const [ currentPage, incrementCurrentPage ] = useState( 0 )
 
     const nextPages = () => {
-        incrementCurrentPage( currentPage + 1 )
+        nextPage( currentPage +1 )
         const currentIndex = (currentPage + 1) * booksToView
-        nextPage( currentIndex )
+        nextIndex( currentIndex )
         getBooks()
     }
 
@@ -60,7 +60,7 @@ const BooksContainer: React.FC<BooksContainerType> = (
             </div>
             { (books.length !== 0) &&
             <div className={ classes.bottomWrapper }>
-              <Button disabled={ isFetching || (currentPage + 1 >= totalPages) }
+              <Button disabled={ isFetching || (currentPage + 1 > totalPages) }
                       onClick={ nextPages }
                       mode={ 'Orange' }
                       title={ `${ totalBooks - books.length } more` }
@@ -78,13 +78,14 @@ const mapStateToProps = ( state: AppStateType ) => {
         isFetching: state.requestFormReducer.isFetching,
         totalBooks: state.requestFormReducer.totalBooks,
         booksToView: state.requestFormReducer.booksToView,
-        startIndex: state.requestFormReducer.startIndex,
+        currentPage: state.requestFormReducer.currentPage,
     }
 }
 
-const { nextPage } = requestFormActions
+const { nextPage, nextIndex } = requestFormActions
 
 export default connect<MapStatePropsType, MapDispatchType, OwnProps, AppStateType>( mapStateToProps, {
     nextPage,
+    nextIndex,
     getBooks,
 } )( BooksContainer )

@@ -1,15 +1,21 @@
 import { ThunkAction } from 'redux-thunk'
 import { AppStateType, GetActionsTypes } from './redux-store'
-import { BooksRequest, itemBook, PaginationType } from '../types/books-api-types'
+import { BooksRequest, ItemBook, PaginationType } from '../types/books-api-types'
 import { getBooksFromApi } from '../api/books-api'
 
 const initialState = {
-    books: [] as itemBook[],
+    books: [] as ItemBook[],
     totalBooks: 0,
     isFetching: false,
-    booksToView: 30, //максимум - 40
-    startIndex: 0,
-    request: {} as BooksRequest,
+    pagination: {
+        maxResults: 30, //максимум - 40
+        startIndex: 0,
+    } as PaginationType,
+    request: {
+        orderBy: 'relevance',
+        categories: 'all',
+        bookName: '',
+    } as BooksRequest,
     selectProps: {
         categories: [ 'all', 'art', 'biography', 'computers', 'history', 'medical', 'poetry' ],
         orderBy: [ 'relevance', 'newest' ],
@@ -31,10 +37,9 @@ const requestFormReducer = ( state = initialState, action: ActionsType ): reques
             }
         }
         case 'request-form-reducer/SET-BOOKS': {
-            let books = (state.startIndex === 0) ? action.books : [ ...state.books, ...action.books ]
             return {
                 ...state,
-                books: (books === undefined) ? [] : books,
+                books: action.books.length === 0 ? [] : [ ...state.books, ...action.books ],
             }
         }
         case 'request-form-reducer/SET-TOTAL-BOOKS-COUNT': {
@@ -43,10 +48,13 @@ const requestFormReducer = ( state = initialState, action: ActionsType ): reques
                 totalBooks: action.totalBooks,
             }
         }
-        case 'request-form-reducer/NEXT-PAGE': {
+        case 'request-form-reducer/NEXT-INDEX': {
             return {
                 ...state,
-                startIndex: action.startIndex,
+                pagination: {
+                    ...state.pagination,
+                    startIndex: action.startIndex,
+                },
             }
         }
         case 'request-form-reducer/SAVE-REQUEST': {
@@ -66,7 +74,7 @@ const requestFormReducer = ( state = initialState, action: ActionsType ): reques
 
 export const requestFormActions = {
     // установка значения в карточки пользователей одной страницы
-    setBooks: ( books: itemBook[] ) => ({
+    setBooks: ( books: ItemBook[] ) => ({
         type: 'request-form-reducer/SET-BOOKS',
         books,
     } as const),
@@ -80,9 +88,9 @@ export const requestFormActions = {
         type: 'request-form-reducer/TOGGLE-IS-FETCHING',
         isFetching,
     } as const),
-    // смена номера отображаемой страницы
-    nextPage: ( startIndex: number ) => ({
-        type: 'request-form-reducer/NEXT-PAGE',
+    // с какого ИНДЕКСА отображать страницы
+    nextIndex: ( startIndex: number ) => ({
+        type: 'request-form-reducer/NEXT-INDEX',
         startIndex,
     } as const),
     // сохранить данные запроса
@@ -97,19 +105,19 @@ export const requestFormActions = {
 export type UsersReducerThunkActionType<R = void> = ThunkAction<Promise<R>, AppStateType, unknown, ActionsType>
 
 // запрос на API и запись в стейт значений поиска книг
-export const getBooks = ( searchForm?: BooksRequest ): UsersReducerThunkActionType =>
+export const getBooks = ( searchForm: BooksRequest,
+                          pagination: PaginationType ): UsersReducerThunkActionType =>
     async ( dispatch, getState ) => {
         // отображение статуса обработки запроса
         dispatch( requestFormActions.toggleIsFetching( true ) )
-        // запрашиваем и собираем в объект данные активных страниц
-        const pagination: PaginationType = {
-            startIndex: getState().requestFormReducer.startIndex,
-            maxResults: getState().requestFormReducer.booksToView,
-        }
+
         // если запрос передан, то сохраняем его в state
         if (searchForm) dispatch( requestFormActions.saveRequest( searchForm ) )
         // если смотрим с нулевой страницы, зануляем список загруженных книг
-        if (pagination.startIndex === 0) dispatch( requestFormActions.setBooks( [] ) )
+        if (pagination.startIndex === 0) {
+            dispatch( requestFormActions.setBooks( [] ) )
+            dispatch( requestFormActions.nextIndex( 0 ) )
+        }
 
         try {
             const response = await getBooksFromApi( getState().requestFormReducer.request, pagination )
@@ -117,6 +125,8 @@ export const getBooks = ( searchForm?: BooksRequest ): UsersReducerThunkActionTy
             dispatch( requestFormActions.setTotalBooksCount( response.totalItems ) )
         } catch (e) {
             alert( 'Error from API is: ' + e )
+            // console.log( 'Error from API is: ', e )
+            // debugger;
         }
         // окончание отображение статуса обработки запроса
         dispatch( requestFormActions.toggleIsFetching( false ) )

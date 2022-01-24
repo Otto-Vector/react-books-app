@@ -29,7 +29,7 @@ export const getBooksFromApi = ( { bookName, categories, orderBy }: BooksRequest
         .filter( n => n[1] !== '' )
         .filter( n => n[1] !== undefined ),
     )
-
+    debugger;
     return instance.get<BooksApiResponseType>( `volumes?${ queryString.stringify( query ) }` )
         .then( response => response.data )
 

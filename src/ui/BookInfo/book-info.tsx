@@ -3,7 +3,7 @@ import classes from './book-info.module.scss'
 import { useParams } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import { AppStateType } from '../../redux/redux-store'
-import { itemBook } from '../../types/books-api-types'
+import { ItemBook } from '../../types/books-api-types'
 
 
 // здесь буду специально использовать хуки
@@ -13,7 +13,7 @@ export const BookInfo: React.FC = () => {
     const books = useSelector( ( state: AppStateType ) => state.requestFormReducer.books )
     const [ { imageLinks, categories, title, authors, description }, setBook ] = useState( books[0].volumeInfo )
 
-    const localBookById = (): itemBook['volumeInfo'] => {
+    const localBookById = (): ItemBook['volumeInfo'] => {
         return books.filter( ( item ) => item.id === bookId )[0].volumeInfo
     }
 
