@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import classes from './books-container.module.scss'
 import anyBookImage from '../../images/AnyBook.jpg'
 import { useDispatch, useSelector } from 'react-redux'
@@ -26,8 +26,7 @@ export const BooksContainer: React.FC<OwnProps> = () => {
     const isFetching = useSelector( getIsFetching )
     const request = useSelector( getRequestBooks )
     const totalBooks = useSelector( getTotalBooksNumber )
-
-    const books = useSelector(getBooksList)
+    const books = useSelector( getBooksList )
 
     const nextPage = () => {
         const _nextIndex = startIndex + maxResults
@@ -36,7 +35,7 @@ export const BooksContainer: React.FC<OwnProps> = () => {
     }
 
     const lastPage = (): boolean => {
-        return (totalBooks-(startIndex+maxResults)) < 0
+        return (totalBooks - (startIndex + maxResults)) <= 0
     }
 
     return (<div>
