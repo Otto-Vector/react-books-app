@@ -1,39 +1,42 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import classes from './book-info.module.scss'
 import { useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { Button } from '../common/Button/Button'
 import anyBookImage from '../../images/AnyBook.jpg'
-import { getBooksList, getOneBookFromLocal } from '../../selectors/request-form-selectors'
-import { requestFormActions } from '../../redux/request-form-reducer'
+import { getBookToView } from '../../selectors/request-form-selectors'
+import { getOneBookFromApi, requestFormActions } from '../../redux/request-form-reducer'
 
 // здесь буду специально использовать хуки
 export const BookInfo: React.FC = () => {
+
     const dispatch = useDispatch()
     // вытаскиваем значение роутера
     const { bookId } = useParams<{ bookId: string | undefined }>()
-    const books = useSelector( getBooksList )
-    const [ {
-        imageLinks,
-        categories,
-        title,
-        authors,
-        description,
-        previewLink,
-    }, setBook ] = useState( books[0].volumeInfo )
 
-    const bookFromFilter = useSelector( getOneBookFromLocal )
+    const {
+        foundedBook: {
+            volumeInfo: {
+                imageLinks,
+                categories,
+                title,
+                authors,
+                description,
+                previewLink,
+            },
+        },
+    } = useSelector( getBookToView )
 
     useEffect( () => {
         dispatch( requestFormActions.setBookIdToView( bookId ) )
-        setBook( bookFromFilter ?? books[0].volumeInfo )
-    }, [ bookId ] )
+        dispatch( getOneBookFromApi( bookId || 'test' ) )
+    }, [] )
 
-
+    // toDo: добавить кнопку "назад к списку"
     return (<div className={ classes.container }>
             <div className={ classes.side }>
                 <img className={ classes.image } alt={ 'bookName' }
-                     src={ imageLinks?.thumbnail || imageLinks?.smallThumbnail || anyBookImage }/>
+                     src={ imageLinks?.medium || imageLinks?.small || anyBookImage }/>
             </div>
             <div className={ classes.side }>
                 <div className={ classes.category }>{ categories }</div>

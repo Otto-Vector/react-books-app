@@ -10,9 +10,9 @@ export const getBooksList: RequestFormSelectors<'books'> = ( state ) => state.re
 export const getRequestBooks: RequestFormSelectors<'request'> = ( state ) => state.requestFormReducer.request
 export const getPagination: RequestFormSelectors<'pagination'> = ( state ) => state.requestFormReducer.pagination
 export const getTotalBooksNumber: RequestFormSelectors<'totalBooks'> = ( state ) => state.requestFormReducer.totalBooks
-export const getBookIdToView: RequestFormSelectors<'bookIdToView'> = ( state ) => state.requestFormReducer.bookIdToView
+export const getBookToView: RequestFormSelectors<'bookToView'> = ( state ) => state.requestFormReducer.bookToView
 
-export const getOneBookFromLocal = createSelector( getBooksList, getBookIdToView,
-    ( booksList, bookId ): ItemBook['volumeInfo'] | undefined => {
-        return booksList.filter( ( book ) => book.id === bookId )[0]?.volumeInfo
+export const getOneBookFromLocal = createSelector( getBooksList, getBookToView,
+    ( booksList, bookToView ): ItemBook['volumeInfo'] | undefined => {
+        return booksList.filter( ( book ) => book.id === bookToView.bookId )[0]?.volumeInfo
     } )

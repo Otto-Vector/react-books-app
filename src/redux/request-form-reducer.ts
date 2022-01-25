@@ -1,7 +1,8 @@
 import { ThunkAction } from 'redux-thunk'
 import { AppStateType, GetActionsTypes } from './redux-store'
 import { BooksRequest, ItemBook, PaginationType } from '../types/books-api-types'
-import { getBooksFromApi } from '../api/books-api'
+import { getBooksFromApi, getOneBookOverIdFromApi } from '../api/books-api'
+import { BookInfoType, initialBook } from './initial-book'
 
 const initialState = {
     books: [] as ItemBook[],
@@ -20,7 +21,10 @@ const initialState = {
         categories: [ 'all', 'art', 'biography', 'computers', 'history', 'medical', 'poetry' ],
         orderBy: [ 'relevance', 'newest' ],
     },
-    bookIdToView: undefined as undefined | string
+    bookToView: {
+        bookId: undefined as undefined | string,
+        foundedBook: initialBook,
+    },
 }
 
 export type RequestFormReducerStateType = typeof initialState
@@ -46,7 +50,7 @@ const requestFormReducer = ( state = initialState, action: ActionsType ): Reques
         case 'request-form-reducer/CLEAR-BOOKS-LIST': {
             return {
                 ...state,
-                books: []
+                books: [],
             }
         }
         case 'request-form-reducer/SET-TOTAL-BOOKS-COUNT': {
@@ -73,7 +77,19 @@ const requestFormReducer = ( state = initialState, action: ActionsType ): Reques
         case 'request-form-reducer/SET-BOOK-ID-TO-VIEW': {
             return {
                 ...state,
-                bookIdToView: action.bookIdToView
+                bookToView: {
+                    ...state.bookToView,
+                    bookId: action.bookId,
+                },
+            }
+        }
+        case 'request-form-reducer/SET-FOUNDED-BOOK-TO-VIEW': {
+            return {
+                ...state,
+                bookToView: {
+                    ...state.bookToView,
+                    foundedBook: action.foundedBook,
+                },
             }
         }
         default: {
@@ -83,8 +99,8 @@ const requestFormReducer = ( state = initialState, action: ActionsType ): Reques
 
 }
 
-/* ЭКШОНЫ USERS */
-
+// toDo: навести порядок в экшонах
+/* ЭКШОНЫ BOOKS */
 export const requestFormActions = {
     // установка значения в карточки пользователей одной страницы
     setBooks: ( books: ItemBook[] | undefined ) => ({
@@ -99,9 +115,13 @@ export const requestFormActions = {
         type: 'request-form-reducer/SET-TOTAL-BOOKS-COUNT',
         totalBooks,
     } as const),
-    setBookIdToView: (bookIdToView: string | undefined) => ({
+    setBookIdToView: ( bookId: string | undefined ) => ({
         type: 'request-form-reducer/SET-BOOK-ID-TO-VIEW',
-        bookIdToView,
+        bookId,
+    } as const),
+    setFoundedBook: ( foundedBook: BookInfoType ) => ({
+        type: 'request-form-reducer/SET-FOUNDED-BOOK-TO-VIEW',
+        foundedBook,
     } as const),
     // ожидание отклика API на запрос поиска пользователей
     toggleIsFetching: ( isFetching: boolean ) => ({
@@ -137,11 +157,18 @@ export const getBooks = ( searchForm: BooksRequest,
             dispatch( requestFormActions.setTotalBooksCount( response.totalItems ) )
         } catch (e) {
             alert( 'Error from Thunk is: ' + e )
-            // console.log( 'Error from API is: ', e )
         }
         // окончание отображение статуса обработки запроса
         dispatch( requestFormActions.toggleIsFetching( false ) )
     }
 
-
+export const getOneBookFromApi = ( bookId: string ): UsersReducerThunkActionType =>
+    async ( dispatch ) => {
+        const response = await getOneBookOverIdFromApi( bookId )
+        if (response.hasOwnProperty('error') ) {
+            alert('НЕ НАЙДЕНО КНИГ ПО ДАННОМУ iD: '+bookId)
+        } else {
+            dispatch( requestFormActions.setFoundedBook( response as BookInfoType) )
+        }
+    }
 export default requestFormReducer

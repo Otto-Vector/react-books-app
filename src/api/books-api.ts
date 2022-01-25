@@ -1,6 +1,7 @@
 import axios from 'axios'
 import { BooksApiResponseType, BooksRequest, PaginationType } from '../types/books-api-types'
 import * as queryString from 'querystring'
+import { BookInfoType } from '../redux/initial-book'
 
 const instance = axios.create( {
     baseURL: 'https://www.googleapis.com/books/v1/',
@@ -18,7 +19,7 @@ export const getBooksFromApi = ( { bookName, categories, orderBy }: BooksRequest
     // создаём объект для query,
     const query = Object.fromEntries( Object
         .entries( {
-            q: `${ intitle }${ subject }`,
+            q: ` ${ intitle }${ subject }`,
             orderBy,
             startIndex,
             maxResults,
@@ -34,5 +35,24 @@ export const getBooksFromApi = ( { bookName, categories, orderBy }: BooksRequest
     const decodedQuery = decodeURIComponent( queryString.stringify( query ) )
 
     return instance.get<BooksApiResponseType>( `volumes?${ decodedQuery }` )
+        .then( response => response.data )
+}
+
+export type BookInfoError = {
+  error: {
+    code: number,
+    message: string,
+    errors: [
+      {
+        message: string,
+        domain: string,
+        reason: string
+      }
+    ]
+  }
+}
+
+export const getOneBookOverIdFromApi = (id: string) => {
+        return instance.get<BookInfoType | BookInfoError>( `volumes/${ id }` )
         .then( response => response.data )
 }
