@@ -1,7 +1,5 @@
-import { createSelector } from 'reselect'
 import { AppStateType } from '../redux/redux-store'
 import { RequestFormReducerStateType } from '../redux/request-form-reducer'
-import { ItemBook } from '../types/books-api-types'
 
 type RequestFormSelectors<T extends keyof Y, Y = RequestFormReducerStateType> = ( state: AppStateType ) => Y[T]
 
@@ -12,7 +10,8 @@ export const getPagination: RequestFormSelectors<'pagination'> = ( state ) => st
 export const getTotalBooksNumber: RequestFormSelectors<'totalBooks'> = ( state ) => state.requestFormReducer.totalBooks
 export const getBookToView: RequestFormSelectors<'bookToView'> = ( state ) => state.requestFormReducer.bookToView
 
-export const getOneBookFromLocal = createSelector( getBooksList, getBookToView,
-    ( booksList, bookToView ): ItemBook['volumeInfo'] | undefined => {
-        return booksList.filter( ( book ) => book.id === bookToView.bookId )[0]?.volumeInfo
-    } )
+// // выборка из списка загруженных книг (пока отключил) - загружаю каждую книгу напрямую из API
+// export const getOneBookFromLocal = createSelector( getBooksList, getBookToView,
+//     ( booksList, bookToView ): ItemBook['volumeInfo'] | undefined => {
+//         return booksList.filter( ( book ) => book.id === bookToView.bookId )[0]?.volumeInfo
+//     } )

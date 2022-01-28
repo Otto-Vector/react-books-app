@@ -11,20 +11,25 @@ const API_KEY = 'AIzaSyAYL_h8bTjemmcHhKGtf2V9-CtalYYMT04'
 
 export const getBooksFromApi = ( { bookName, categories, orderBy }: BooksRequest,
                                  { startIndex = 0, maxResults = 30 }: PaginationType ) => {
-    const intitle = `intitle:${ bookName }`
+    // пока непосредственно по имени появляются небольшие списки, поэтому ищем непосредтвенно по "q"
+    const intitle = `+intitle:${ bookName }`
+    // категория книг (согласно селектора)
     const subject = (categories === 'all') ? '' : `+subject:${ categories }`
+    // полное или краткое отображение информации в присылаемом ответе
     const projection: 'full' | 'lite' = 'full'
-    const langRestrict: 'ru' | 'en' = 'ru'
+    // выбор языка
+    // const langRestrict: 'ru' | 'en' = 'ru'
 
     // создаём объект для query,
     const query = Object.fromEntries( Object
         .entries( {
+            //q: ` ${ bookName }${ subject }`, // вариант, где ищется слово в книгах без привязки к названию
             q: ` ${ intitle }${ subject }`,
-            orderBy,
-            startIndex,
-            maxResults,
-            projection,
-            langRestrict,
+            orderBy, // фильтровать по возрастанию/убыванию
+            startIndex, // с какого индекса делать запрос
+            maxResults, // запрашиваемое количество книг (максимум 40)
+            projection, // полное или краткое отображение инфы (чувствительно к subject)
+            // langRestrict, // выбор языка
             key: API_KEY,
         } )
         // чистим пустые значения
@@ -38,21 +43,24 @@ export const getBooksFromApi = ( { bookName, categories, orderBy }: BooksRequest
         .then( response => response.data )
 }
 
-export type BookInfoError = {
-  error: {
-    code: number,
-    message: string,
-    errors: [
-      {
+
+// сообщение об ошибке, когда книга не найдена
+export type BookInfoErrorType = {
+    error: {
+        code: number,
         message: string,
-        domain: string,
-        reason: string
-      }
-    ]
-  }
+        errors: [
+            {
+                message: string,
+                domain: string,
+                reason: string
+            }
+        ]
+    }
 }
 
-export const getOneBookOverIdFromApi = (id: string) => {
-        return instance.get<BookInfoType | BookInfoError>( `volumes/${ id }` )
+// загрузка одной книги по ID
+export const getOneBookOverIdFromApi = ( BookId: string ) => {
+    return instance.get<BookInfoType | BookInfoErrorType>( `volumes/${ BookId }` )
         .then( response => response.data )
 }
