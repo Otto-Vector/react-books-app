@@ -4,8 +4,9 @@ import { useNavigate, useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { Button } from '../common/Button/Button'
 import anyBookImage from '../../images/AnyBook.jpg'
-import { getBooksList, getBookToView, getTotalBooksNumber } from '../../selectors/request-form-selectors'
+import { getBookToView, getTotalBooksNumber } from '../../selectors/request-form-selectors'
 import { getOneBookFromApi, requestFormActions } from '../../redux/request-form-reducer'
+import { removeAllHTMLTags } from '../../utils/utils'
 
 // здесь буду специально использовать хуки
 export const BookInfo: React.FC = () => {
@@ -43,24 +44,28 @@ export const BookInfo: React.FC = () => {
     return (<div className={ classes.container }>
             <div className={ classes.side }>
                 <img className={ classes.image } alt={ 'bookName' }
-                     src={ imageLinks?.small || imageLinks?.thumbnail || anyBookImage }/>
+                     src={ imageLinks?.thumbnail || imageLinks?.smallThumbnail || anyBookImage }/>
             </div>
             <div className={ classes.side }>
-                <div className={ classes.category }>{ categories }</div>
-                <div className={ classes.bookName }>{ title }</div>
-                <p className={ classes.authors }>{ authors }</p>
-                <p className={ classes.authors }>{ description }</p>
-                <Button disabled={ !previewLink }
-                        mode={ 'Gray' }
-                        title={ 'read in google' }
-                >
-                    <a href={ previewLink } target="_blank" rel="noopener noreferrer">Read</a>
-                </Button>
-                <Button disabled={ !hasBooks }
-                        mode={ 'Pink' }
-                        title={ 'Go back' }
-                        onClick={ () => navigate( -1 ) }
-                >Back to List</Button>
+                <p className={ classes.category }>{ categories }</p>
+                <h2 className={ classes.bookName }>{ title }</h2>
+                <article className={ classes.authors }>{ authors }</article>
+                <p className={ classes.description } >{ removeAllHTMLTags(description) }</p>
+                <div className={ classes.buttonsPanel }>
+                    <a href={ previewLink }
+                       target="_blank" rel="noopener noreferrer"
+                       role={ 'button' }>
+                        <Button disabled={ !previewLink }
+                                mode={ 'Gray' }
+                                title={ 'read in google' }
+                        >Read</Button>
+                    </a>
+                    <Button disabled={ !hasBooks }
+                            mode={ 'Pink' }
+                            title={ 'Go back' }
+                            onClick={ () => navigate( -1 ) }
+                    >Back to List</Button>
+                </div>
             </div>
         </div>
     )
