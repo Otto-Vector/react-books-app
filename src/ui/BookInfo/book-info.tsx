@@ -7,6 +7,7 @@ import anyBookImage from '../../images/AnyBook.jpg'
 import { getBookToView, getTotalBooksNumber } from '../../selectors/request-form-selectors'
 import { getOneBookFromApi, requestFormActions } from '../../redux/request-form-reducer'
 import { removeAllHTMLTags } from '../../utils/utils'
+import { MaterialIcon } from '../common/MaterialIcon/MaterialIcon'
 
 // здесь буду специально использовать хуки
 export const BookInfo: React.FC = () => {
@@ -58,13 +59,15 @@ export const BookInfo: React.FC = () => {
                         <Button disabled={ !previewLink }
                                 mode={ 'Gray' }
                                 title={ 'read in google' }
-                        >Read</Button>
+                        >
+                            <MaterialIcon icon_name={'menu_book'}/> Read</Button>
                     </a>
                     <Button disabled={ !hasBooks }
                             mode={ 'Pink' }
                             title={ 'Go back' }
                             onClick={ () => navigate( -1 ) }
-                    >Back to List</Button>
+                    >
+                        Back to List</Button>
                 </div>
             </div>
         </div>

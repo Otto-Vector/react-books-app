@@ -29,9 +29,9 @@ $btnNoFillBorderColor: #A0B4FF;
   cursor: pointer;
   transition: all 0.2s ease-in-out;
 
-  &:first-letter {
-    text-transform: uppercase;
-  }
+  //&:first-letter {
+  //  text-transform: uppercase;
+  //}
 
   &:hover {
     transform: translateY(-1px);
@@ -67,7 +67,7 @@ $btnNoFillBorderColor: #A0B4FF;
   }
 
   &Gray {
-    font-weight: 500;
+    //font-weight: 500;
     background-color: $btnGrayBgColor;
     color: $btnGrayFontColor;
   }
@@ -79,7 +79,7 @@ $btnNoFillBorderColor: #A0B4FF;
 
   &NoFill {
     padding: rem(12) rem(15);
-    font-weight: 500;
+    //font-weight: 500;
     background-color: $btnNoFillBgColor;
     color: $btnNoFillFontColor;
     border: 1px solid $btnNoFillBorderColor;
