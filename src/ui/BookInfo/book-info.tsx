@@ -19,12 +19,12 @@ export const BookInfo: React.FC = () => {
     const {
         foundedBook: {
             volumeInfo: {
-                imageLinks,
-                categories,
-                title,
-                authors,
-                description,
-                previewLink,
+                imageLinks = { thumbnail: '', smallThumbnail: '' },
+                categories = [ '' ],
+                title = '',
+                authors = [ '' ],
+                description = '',
+                previewLink = '',
             },
         },
     } = useSelector( getBookToView )
@@ -51,7 +51,7 @@ export const BookInfo: React.FC = () => {
                 <p className={ classes.category }>{ categories }</p>
                 <h2 className={ classes.bookName }>{ title }</h2>
                 <article className={ classes.authors }>{ authors }</article>
-                <p className={ classes.description } >{ removeAllHTMLTags(description) }</p>
+                <p className={ classes.description }>{ removeAllHTMLTags( description ) }</p>
                 <div className={ classes.buttonsPanel }>
                     <a href={ previewLink }
                        target="_blank" rel="noopener noreferrer"
@@ -60,12 +60,12 @@ export const BookInfo: React.FC = () => {
                                 mode={ 'Gray' }
                                 title={ 'read in google' }
                         >
-                            <MaterialIcon icon_name={'menu_book'}/> Read</Button>
+                            <MaterialIcon icon_name={ 'menu_book' }/>{ ' Read' }</Button>
                     </a>
-                    <Button disabled={ !hasBooks }
-                            mode={ 'Pink' }
-                            title={ 'Go back' }
-                            onClick={ () => navigate( -1 ) }
+                    < Button disabled={ !hasBooks }
+                             mode={ 'Pink' }
+                             title={ 'Go back' }
+                             onClick={ () => navigate( -1 ) }
                     >
                         Back to List</Button>
                 </div>

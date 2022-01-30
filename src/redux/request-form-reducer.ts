@@ -23,7 +23,25 @@ const initialState = {
     },
     bookToView: {
         bookId: undefined as undefined | string,
-        foundedBook: initialBook,
+        foundedBook: {
+            id: 'test',
+
+            volumeInfo: {
+                title: 'Test title info',
+                authors: [ 'test Author1', 'test Author2' ],
+                categories: [ 'category1', 'category2' ],
+                imageLinks: {
+                    thumbnail: '',
+                    smallThumbnail: '',
+                    small: '',
+                    medium: '',
+                    extraLarge: '',
+                    large: ''
+                },
+                description: "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like)",
+                previewLink: ""
+            },
+        } as BookInfoType,
     },
 }
 
@@ -164,11 +182,15 @@ export const getBooks = ( searchForm: BooksRequest,
 
 export const getOneBookFromApi = ( bookId: string ): UsersReducerThunkActionType =>
     async ( dispatch ) => {
-        const response = await getOneBookOverIdFromApi( bookId )
-        if (response.hasOwnProperty('error') ) {
-            alert('НЕ НАЙДЕНО КНИГ ПО ДАННОМУ iD: '+bookId)
-        } else {
-            dispatch( requestFormActions.setFoundedBook( response as BookInfoType) )
+
+        try {
+            const response = await getOneBookOverIdFromApi( bookId )
+            dispatch( requestFormActions.setFoundedBook( response as BookInfoType ) )
+            debugger
+        } catch (e) {
+            alert( 'НЕ НАЙДЕНО КНИГ ПО ДАННОМУ iD: ' + bookId )
+            alert( 'ошибка сервера: ' + e )
         }
+
     }
 export default requestFormReducer

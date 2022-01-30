@@ -3,12 +3,13 @@ import { BooksApiResponseType, BooksRequest, PaginationType } from '../types/boo
 import * as queryString from 'querystring'
 import { BookInfoType } from '../redux/initial-book'
 
+const API_KEY = 'AIzaSyAYL_h8bTjemmcHhKGtf2V9-CtalYYMT04'
+
 const instance = axios.create( {
     baseURL: 'https://www.googleapis.com/books/v1/',
 } )
 
-const API_KEY = 'AIzaSyAYL_h8bTjemmcHhKGtf2V9-CtalYYMT04'
-
+// запрос на сервер
 export const getBooksFromApi = ( { bookName, categories, orderBy }: BooksRequest,
                                  { startIndex = 0, maxResults = 30 }: PaginationType ) => {
     // пока непосредственно по имени появляются небольшие списки, поэтому ищем непосредтвенно по "q"
@@ -21,7 +22,7 @@ export const getBooksFromApi = ( { bookName, categories, orderBy }: BooksRequest
     // const langRestrict: 'ru' | 'en' = 'ru'
 
     // создаём объект для query,
-    const query = Object.fromEntries( Object
+    const params = Object.fromEntries( Object
         .entries( {
             //q: ` ${ bookName }${ subject }`, // вариант, где ищется слово в книгах без привязки к названию
             q: ` ${ intitle }${ subject }`,
@@ -37,7 +38,7 @@ export const getBooksFromApi = ( { bookName, categories, orderBy }: BooksRequest
         .filter( n => n[1] !== undefined ),
     )
     // меняем значение с процентного на нормальный запрос
-    const decodedQuery = decodeURIComponent( queryString.stringify( query ) )
+    const decodedQuery = decodeURIComponent( queryString.stringify( params ) )
 
     return instance.get<BooksApiResponseType>( `volumes?${ decodedQuery }` )
         .then( response => response.data )
@@ -45,22 +46,23 @@ export const getBooksFromApi = ( { bookName, categories, orderBy }: BooksRequest
 
 
 // сообщение об ошибке, когда книга не найдена
-export type BookInfoErrorType = {
-    error: {
-        code: number,
-        message: string,
-        errors: [
-            {
-                message: string,
-                domain: string,
-                reason: string
-            }
-        ]
-    }
-}
+// export type BookInfoErrorType = {
+//     error: {
+//         code: number,
+//         message: string,
+//         errors: [
+//             {
+//                 message: string,
+//                 domain: string,
+//                 reason: string
+//             }
+//         ]
+//     }
+// }
 
 // загрузка одной книги по ID
 export const getOneBookOverIdFromApi = ( BookId: string ) => {
-    return instance.get<BookInfoType | BookInfoErrorType>( `volumes/${ BookId }` )
+    return instance.get<BookInfoType>( `volumes/${ BookId }` )
         .then( response => response.data )
+
 }
