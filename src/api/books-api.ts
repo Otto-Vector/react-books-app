@@ -15,7 +15,7 @@ export const getBooksFromApi = ( { bookName, categories, orderBy }: BooksRequest
     // пока непосредственно по имени появляются небольшие списки, поэтому ищем непосредтвенно по "q"
     const intitle = `+intitle:${ bookName }`
     // категория книг (согласно селектора)
-    const subject = (categories === 'all') ? '' : `+subject:${ categories }`
+    const subject: string = categories === 'all' ? '' : `+subject:${ categories }`
     // полное или краткое отображение информации в присылаемом ответе
     const projection: 'full' | 'lite' = 'full'
     // выбор языка
@@ -25,7 +25,7 @@ export const getBooksFromApi = ( { bookName, categories, orderBy }: BooksRequest
     const params = Object.fromEntries( Object
         .entries( {
             //q: ` ${ bookName }${ subject }`, // вариант, где ищется слово в книгах без привязки к названию
-            q: ` ${ intitle }${ subject }`,
+            q: `${ intitle }${ subject }`,
             orderBy, // фильтровать по возрастанию/убыванию
             startIndex, // с какого индекса делать запрос
             maxResults, // запрашиваемое количество книг (максимум 40)

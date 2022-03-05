@@ -10,28 +10,29 @@ type OwnProps = {
 }
 
 
-const FormType = ( FormType: string ): React.FC<OwnProps> => ( {
-                                                                   input, meta, resetFieldBy, placeholder,
-                                                               } ) => {
+const FormType = ( FormType: 'textarea' | 'input' ): React.FC<OwnProps> => (
+    {
+        input, meta, resetFieldBy, placeholder,
+    } ) => {
 
     const isError = (meta.error || meta.submitError) && meta.touched
 
     return (<div className={ styles.inputWrapper + ' ' + styles.search }>
-        { resetFieldBy && <div
-          className={ styles.clearSearch + ' ' + (!meta.dirty && styles.clearSearchUnfocused) }
-          onClick={ () => {
-              resetFieldBy.change( input.name, '' )
-              resetFieldBy.resetFieldState( input.name )
-          } }
-        > </div>
-        }
-          <FormType
-              { ...input }
-              className={ styles.input + ' ' + (isError ? styles.error : '') }
-              placeholder={ placeholder }
-          />
             {/*кнопка для сброса параметров поля
-      (проявляется, если переданы методы resetFieldBy={form} в объявленном объекте Field*/ }
+            (проявляется, если переданы методы resetFieldBy={form} в объявленном объекте Field*/ }
+            { resetFieldBy && <div
+              className={ styles.clearSearch + ' ' + (!meta.dirty && styles.clearSearchUnfocused) }
+              onClick={ () => {
+                  resetFieldBy.change( input.name, '' )
+                  resetFieldBy.resetFieldState( input.name )
+              } }
+            > </div>
+            }
+            <FormType
+                { ...input }
+                className={ styles.input + ' ' + (isError ? styles.error : '') }
+                placeholder={ placeholder }
+            />
 
             {/*сообщение об ошибке появляется в этом спане*/ }
             { isError && (<span className={ styles.errorSpan }>{ meta.error }</span>) }

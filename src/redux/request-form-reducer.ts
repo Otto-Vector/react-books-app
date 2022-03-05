@@ -186,7 +186,6 @@ export const getOneBookFromApi = ( bookId: string ): UsersReducerThunkActionType
         try {
             const response = await getOneBookOverIdFromApi( bookId )
             dispatch( requestFormActions.setFoundedBook( response as BookInfoType ) )
-            debugger
         } catch (e) {
             alert( 'НЕ НАЙДЕНО КНИГ ПО ДАННОМУ iD: ' + bookId )
             alert( 'ошибка сервера: ' + e )
