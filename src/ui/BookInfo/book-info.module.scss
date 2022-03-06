@@ -4,17 +4,26 @@
 
 .container {
     display: flex;
+    justify-content: space-around;
     background-color: whitesmoke;
     font-size: 1.2rem;
     padding: rem(20);
     box-shadow: black rem(7) rem(7) rem(8);
     margin: rem(25) auto;
+
+        @include mq('tablet', 'max') {
+        flex-wrap: wrap;
+    }
 }
 
 .side {
     margin: rem(5);
     min-width: 40%;
     text-align: center;
+
+    @include mq('tablet', 'max') {
+        min-width: 85%;
+    }
 }
 
 .image {

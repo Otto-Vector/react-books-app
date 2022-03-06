@@ -27,7 +27,7 @@ const SearchForm: React.FC<OwnProps> = ( { onSubmit } ) => {
                 orderBy: 'relevance',
             } as BooksRequest }
             render={
-                ( { submitError, handleSubmit, pristine, form, submitting, values } ) => (
+                ( { submitError, handleSubmit, pristine, form, submitting } ) => (
                     <form onSubmit={ handleSubmit }>
                         <Field name={ 'bookName' }
                                placeholder={ 'Enter book here' }
@@ -54,15 +54,17 @@ const SearchForm: React.FC<OwnProps> = ( { onSubmit } ) => {
                                 </Field>
                             </div>
                         </div>
-                        <div className={styles.buttonsPanel}>
-                            <Button type={'submit'} disabled={submitting} mode={'White'}>Done</Button>
-                        <Button type={ 'reset' }
-                                disabled={ pristine || submitting }
-                                onClick={ () => {form.reset()} }
-                                mode={'Gray'}
-                        >X
-                        </Button>
-                            </div>
+                        <div className={ styles.buttonsPanel }>
+                            <Button type={ 'submit' } disabled={ submitting } mode={ 'White' }>Done</Button>
+                            <Button type={ 'reset' }
+                                    disabled={ pristine || submitting }
+                                    onClick={ () => {
+                                        form.reset()
+                                    } }
+                                    mode={ 'Gray' }
+                            >X
+                            </Button>
+                        </div>
                         { submitError && <span className={ styles.onError }>{ submitError }</span> }
                     </form>
                 )
