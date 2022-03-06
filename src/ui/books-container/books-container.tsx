@@ -13,6 +13,7 @@ import {
     getRequestBooks,
     getTotalBooksNumber,
 } from '../../selectors/request-form-selectors'
+import { GoToScrollButton } from '../common/GoToScrollButton/GoToScrollButton'
 
 const { nextIndex } = requestFormActions
 
@@ -74,6 +75,9 @@ export const BooksContainer: React.FC<OwnProps> = () => {
                   { ' Load more' }
               </Button>
             </div> }
+            <GoToScrollButton isGoTop={false} isLeft={true}/>
+            <GoToScrollButton isGoTop={true} isLeft={false}/>
+
         </div>
     )
 }

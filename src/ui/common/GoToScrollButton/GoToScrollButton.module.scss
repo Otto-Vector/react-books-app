@@ -3,11 +3,11 @@
 
 $shadowColor: rgba(black, 0.5);
 
-.goBottomHidden {
+.goTopHidden {
     display: none;
 }
 
-.goBottom {
+.goTop {
     background-color: transparent;
     text-align: center;
 
@@ -15,7 +15,6 @@ $shadowColor: rgba(black, 0.5);
         @include flex-center();
         @include size(rem(35));
         position: fixed;
-        left: rem(40);
         bottom: rem(40);
 
         font-family: $MaterialFont;
@@ -29,6 +28,12 @@ $shadowColor: rgba(black, 0.5);
         cursor: pointer;
         transition: all 0.2s ease-in-out;
 
+        &Left {
+            left: rem(40);
+        }
+        &Right {
+            right: rem(40);
+        }
         &:hover {
             transform: translateY(-5%);
             box-shadow: 1px 1px 3px $shadowColor;
