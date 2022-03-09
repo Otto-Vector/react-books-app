@@ -1,7 +1,7 @@
 @import "src/styles/variables";
 @import "src/styles/mixins";
 
-.wrapper {
+.booksContainer {
   @include flex-center();
   flex-wrap: wrap;
   justify-content: space-around;
@@ -12,4 +12,20 @@
   @include flex-center(column);
   width: 100%;
   padding-bottom: rem(15);
+}
+
+// для панели кнопок быстрого скроллинга
+.scrollButtonsPanelFixed {
+  width: 100%;
+  position: fixed;
+  bottom: rem(40);
+  left: 0;
+}
+
+.scrollButtonsPanel {
+  max-width: rem(1600);
+  padding: 0 rem(20);
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
 }

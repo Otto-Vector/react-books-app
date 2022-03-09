@@ -3,19 +3,17 @@
 
 $shadowColor: rgba(black, 0.5);
 
-.goTopHidden {
+.scrollButtonHidden {
     display: none;
 }
 
-.goTop {
+.scrollButton {
     background-color: transparent;
     text-align: center;
 
     &Icon {
         @include flex-center();
         @include size(rem(35));
-        position: fixed;
-        bottom: rem(40);
 
         font-family: $MaterialFont;
         font-size: rem(20);
@@ -28,12 +26,6 @@ $shadowColor: rgba(black, 0.5);
         cursor: pointer;
         transition: all 0.2s ease-in-out;
 
-        &Left {
-            left: rem(40);
-        }
-        &Right {
-            right: rem(40);
-        }
         &:hover {
             transform: translateY(-5%);
             box-shadow: 1px 1px 3px $shadowColor;

@@ -13,7 +13,7 @@ import {
     getRequestBooks,
     getTotalBooksNumber,
 } from '../../selectors/request-form-selectors'
-import { GoToScrollButton } from '../common/GoToScrollButton/GoToScrollButton'
+import { FastScrollButton } from '../common/GoToScrollButton/FastScrollButton'
 
 const { nextIndex } = requestFormActions
 
@@ -46,7 +46,7 @@ export const BooksContainer: React.FC<OwnProps> = () => {
 
     return (<div>
             <Counter totalBooks={ totalBooks }/>
-            <div className={ classes.wrapper }>
+            <div className={ classes.booksContainer }>
                 { (books.length !== 0)
                     ? books.map( ( {
                                        id,
@@ -75,8 +75,12 @@ export const BooksContainer: React.FC<OwnProps> = () => {
                   { ' Load more' }
               </Button>
             </div> }
-            <GoToScrollButton isGoTop={false} isLeft={true}/>
-            <GoToScrollButton isGoTop={true} isLeft={false}/>
+            <div className={ classes.scrollButtonsPanelFixed }>
+                <div className={ classes.scrollButtonsPanel }>
+                <FastScrollButton goTo={ 'top' }/>
+                <FastScrollButton goTo={ 'bottom' }/>
+                </div>
+            </div>
 
         </div>
     )
