@@ -52,13 +52,14 @@ export const BookInfo: React.FC = () => {
                 <h2 className={ classes.bookName }>{ title }</h2>
                 <article className={ classes.authors }>{ authors }</article>
                 <p className={ classes.description }>{ removeAllHTMLTags( description ) }</p>
+
                 <div className={ classes.buttonsPanel }>
                     <a href={ previewLink }
                        target="_blank" rel="noopener noreferrer"
                        role={ 'button' }>
                         <Button disabled={ !previewLink }
                                 mode={ 'Gray' }
-                                title={ 'read in google' }
+                                title={ 'Read in Google' }
                         >
                             <MaterialIcon icon_name={ 'menu_book' }/>{ ' Read' }</Button>
                     </a>

@@ -7,7 +7,7 @@ type OwnProps = {
     hSize?: string
 }
 
-const Preloader: React.FC<OwnProps> = ( { hSize = '100%' } ) => {
+export const Preloader: React.FC<OwnProps> = ( { hSize = '100%' } ) => {
 
     return (
         <span className={ styles.preloader } >
@@ -15,5 +15,3 @@ const Preloader: React.FC<OwnProps> = ( { hSize = '100%' } ) => {
         </span>
     )
 }
-
-export default Preloader
