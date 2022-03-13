@@ -8,40 +8,41 @@ const initialState = {
     books: [] as ItemBook[],
     totalBooks: 0,
     isFetching: false,
-    pagination: {
-        maxResults: 30, //максимум - 40
+    pagination: { // запрос на количество книг
+        maxResults: 30, // максимум - 40
         startIndex: 0,
     } as PaginationType,
-    request: {
+    request: { // сам запрос на книгу
         orderBy: 'relevance',
         categories: 'all',
         bookName: '',
     } as BooksRequest,
-    selectProps: {
+    selectProps: { // параметры выбора в селекторах
         categories: [ 'all', 'art', 'biography', 'computers', 'history', 'medical', 'poetry' ],
         orderBy: [ 'relevance', 'newest' ],
     },
     bookToView: {
         bookId: undefined as undefined | string,
-        foundedBook: {
-            id: 'test',
-
-            volumeInfo: {
-                title: 'Test title info',
-                authors: [ 'test Author1', 'test Author2' ],
-                categories: [ 'category1', 'category2' ],
-                imageLinks: {
-                    thumbnail: '',
-                    smallThumbnail: '',
-                    small: '',
-                    medium: '',
-                    extraLarge: '',
-                    large: ''
-                },
-                description: "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like)",
-                previewLink: ""
-            },
-        } as BookInfoType,
+        foundedBook: null as BookInfoType | null,
+        // foundedBook: {
+        //     id: 'test',
+        //
+        //     volumeInfo: {
+        //         title: 'Test title info',
+        //         authors: [ 'test Author1', 'test Author2' ],
+        //         categories: [ 'category1', 'category2' ],
+        //         imageLinks: {
+        //             thumbnail: '',
+        //             smallThumbnail: '',
+        //             small: '',
+        //             medium: '',
+        //             extraLarge: '',
+        //             large: ''
+        //         },
+        //         description: "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like)",
+        //         previewLink: ""
+        //     },
+        // } as BookInfoType,
     },
 }
 
@@ -137,7 +138,7 @@ export const requestFormActions = {
         type: 'request-form-reducer/SET-BOOK-ID-TO-VIEW',
         bookId,
     } as const),
-    setFoundedBook: ( foundedBook: BookInfoType ) => ({
+    setFoundedBook: ( foundedBook: BookInfoType | null ) => ({
         type: 'request-form-reducer/SET-FOUNDED-BOOK-TO-VIEW',
         foundedBook,
     } as const),
@@ -182,7 +183,7 @@ export const getBooks = ( searchForm: BooksRequest,
 
 export const getOneBookFromApi = ( bookId: string ): UsersReducerThunkActionType =>
     async ( dispatch ) => {
-
+        // requestFormActions.setFoundedBook(null)
         try {
             const response = await getOneBookOverIdFromApi( bookId )
             dispatch( requestFormActions.setFoundedBook( response as BookInfoType ) )
