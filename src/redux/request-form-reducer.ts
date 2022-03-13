@@ -6,7 +6,7 @@ import { BookInfoType } from './initial-book'
 
 const initialState = {
     books: [] as ItemBook[],
-    totalBooks: 0,
+    totalBooks: -1, // минус один, чтобы до первого поиска не отображалось количество найденных книг равное нулю
     isFetching: false,
     pagination: { // запрос на количество книг
         maxResults: 30, // максимум - 40
@@ -162,7 +162,6 @@ export const getBooks = ( searchForm: BooksRequest,
     async ( dispatch ) => {
         // отображение статуса обработки запроса
         dispatch( requestFormActions.toggleIsFetching( true ) )
-
         try {
             const response = await getBooksFromApi( searchForm, pagination )
             dispatch( requestFormActions.setBooks( response.items ) )
