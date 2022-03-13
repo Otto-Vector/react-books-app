@@ -2,7 +2,7 @@ import { ThunkAction } from 'redux-thunk'
 import { AppStateType, GetActionsTypes } from './redux-store'
 import { BooksRequest, ItemBook, PaginationType } from '../types/books-api-types'
 import { getBooksFromApi, getOneBookOverIdFromApi } from '../api/books-api'
-import { BookInfoType, initialBook } from './initial-book'
+import { BookInfoType } from './initial-book'
 
 const initialState = {
     books: [] as ItemBook[],
@@ -24,26 +24,8 @@ const initialState = {
     bookToView: {
         bookId: undefined as undefined | string,
         foundedBook: null as BookInfoType | null,
-        // foundedBook: {
-        //     id: 'test',
-        //
-        //     volumeInfo: {
-        //         title: 'Test title info',
-        //         authors: [ 'test Author1', 'test Author2' ],
-        //         categories: [ 'category1', 'category2' ],
-        //         imageLinks: {
-        //             thumbnail: '',
-        //             smallThumbnail: '',
-        //             small: '',
-        //             medium: '',
-        //             extraLarge: '',
-        //             large: ''
-        //         },
-        //         description: "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like)",
-        //         previewLink: ""
-        //     },
-        // } as BookInfoType,
     },
+    apiError: null as null | string,
 }
 
 export type RequestFormReducerStateType = typeof initialState
@@ -111,6 +93,12 @@ const requestFormReducer = ( state = initialState, action: ActionsType ): Reques
                 },
             }
         }
+        case 'request-form-reducer/SAVE-API-ERROR': {
+            return {
+                ...state,
+                apiError: action.error,
+            }
+        }
         default: {
             return state
         }
@@ -157,6 +145,11 @@ export const requestFormActions = {
         type: 'request-form-reducer/SAVE-REQUEST',
         request,
     } as const),
+    // ошибка сервера
+    setApiError: ( error: string | null ) => ({
+        type: 'request-form-reducer/SAVE-API-ERROR',
+        error,
+    } as const),
 }
 
 /* САНКИ */
@@ -183,13 +176,15 @@ export const getBooks = ( searchForm: BooksRequest,
 
 export const getOneBookFromApi = ( bookId: string ): UsersReducerThunkActionType =>
     async ( dispatch ) => {
-        // requestFormActions.setFoundedBook(null)
+        dispatch( requestFormActions.setApiError( null ) )
         try {
             const response = await getOneBookOverIdFromApi( bookId )
             dispatch( requestFormActions.setFoundedBook( response as BookInfoType ) )
         } catch (e) {
-            alert( 'НЕ НАЙДЕНО КНИГ ПО ДАННОМУ iD: ' + bookId )
-            alert( 'ошибка сервера: ' + e )
+            dispatch( requestFormActions.setFoundedBook( null ) )
+            dispatch( requestFormActions.setApiError( 'НЕ НАЙДЕНО КНИГ ПО ДАННОМУ iD: ' + bookId ) )
+            // alert( 'НЕ НАЙДЕНО КНИГ ПО ДАННОМУ iD: ' + bookId )
+            // alert( 'ошибка сервера: ' + e )
         }
 
     }

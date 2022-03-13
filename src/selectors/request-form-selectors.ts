@@ -9,6 +9,7 @@ export const getRequestBooks: RequestFormSelectors<'request'> = ( state ) => sta
 export const getPagination: RequestFormSelectors<'pagination'> = ( state ) => state.requestFormReducer.pagination
 export const getTotalBooksNumber: RequestFormSelectors<'totalBooks'> = ( state ) => state.requestFormReducer.totalBooks
 export const getBookToView: RequestFormSelectors<'bookToView'> = ( state ) => state.requestFormReducer.bookToView
+export const getApiError: RequestFormSelectors<'apiError'> = ( state ) => state.requestFormReducer.apiError
 
 // // выборка из списка загруженных книг (пока отключил) - загружаю каждую книгу напрямую из API
 // export const getOneBookFromLocal = createSelector( getBooksList, getBookToView,
