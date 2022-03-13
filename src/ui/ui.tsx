@@ -7,7 +7,7 @@ import {
     Route,
     Routes,
 } from 'react-router-dom'
-import { BookInfo } from './BookInfo/book-info'
+import { BookInfo, BookPreview } from './BookInfo/book-info'
 
 export const UiComponent: React.FC = () => {
 
@@ -18,7 +18,8 @@ export const UiComponent: React.FC = () => {
                 <Routes>
                     <Route path='/' element={ <Navigate to={ '/search' }/> }/>
                     <Route path='/search' element={ <BooksContainer/> }/>
-                    <Route path='/book/:bookId' element={ <BookInfo/> }/>
+                    {/*<Route path='/book/:bookId' element={ <BookInfo/> }/>*/}
+                    <Route path='/book/:bookId' element={ <BookPreview/> }/>
                     <Route path='*' element={ <h1>This site NOT FOUND. Try another address</h1> }/>
                 </Routes>
             </div>

@@ -8,6 +8,51 @@ import { getBookToView, getTotalBooksNumber } from '../../selectors/request-form
 import { getOneBookFromApi, requestFormActions } from '../../redux/request-form-reducer'
 import { removeAllHTMLTags } from '../../utils/utils'
 import { MaterialIcon } from '../common/MaterialIcon/MaterialIcon'
+import { PreloaderBar } from '../common/PreloaderBar/PreloaderBar'
+
+export const BookPreview: React.FC = () => {
+    return (<div className={ classes.container }>
+            <div className={ classes.side }>
+                <img className={ classes.image } alt={ 'emptyPreloader' }
+                     src={ anyBookImage }/>
+            </div>
+            <div className={ classes.side }>
+                <p className={ classes.category } style={ { width: '50%' } }>
+                    <PreloaderBar height={ '1.8rem' }/>
+                </p>
+                <h2 className={ classes.bookName } style={ { width: '50%' } }>
+                    <PreloaderBar height={ '2.25rem' }/>
+                </h2>
+                <article className={ classes.authors } style={ { width: '50%' } }>
+                    <PreloaderBar height={ '1.8rem' }/>
+                </article>
+                <p className={ classes.description }>
+                    {
+                        [ ...Array( 8 ) ]
+                            .map( ( e, i ) =>
+                                <PreloaderBar key={ i } height={ '1.7rem' }/> )
+                    }
+
+                </p>
+
+                <div className={ classes.buttonsPanel }>
+                    <Button disabled={ true }
+                            mode={ 'Gray' }
+                            title={ 'PreButton' }
+                    >
+                        <div style={ { width: '5rem' } }><PreloaderBar/></div>
+                    </Button>
+                    < Button disabled={ true }
+                             mode={ 'Pink' }
+                             title={ 'PreButton' }
+                    >
+                        <div style={ { width: '5rem' } }><PreloaderBar/></div>
+                    </Button>
+                </div>
+            </div>
+        </div>
+    )
+}
 
 // здесь буду специально использовать хуки
 export const BookInfo: React.FC = () => {
