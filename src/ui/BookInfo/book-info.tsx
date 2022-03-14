@@ -53,8 +53,8 @@ export const BookInfo: React.FC = () => {
                 </div>
                 <div className={ classes.side }>
                     <p className={ classes.category }>{ categories }</p>
-                    <h2 className={ classes.bookName }>{ title }</h2>
-                    <article className={ classes.authors }>{ authors }</article>
+                    <h2 className={ classes.bookName } title={'Book header'}>{ title }</h2>
+                    <article className={ classes.authors } title={'Authors'}>{ authors }</article>
                     <p className={ classes.description }>{ removeAllHTMLTags( description ) }</p>
 
                     <div className={ classes.buttonsPanel }>
@@ -62,17 +62,17 @@ export const BookInfo: React.FC = () => {
                            target="_blank" rel="noopener noreferrer"
                            role={ 'button' }>
                             <Button disabled={ !previewLink }
-                                    mode={ 'Gray' }
+                                    mode={ 'White' }
                                     title={ 'Read in Google' }
                             >
                                 <MaterialIcon icon_name={ 'menu_book' }/>{ ' Read' }</Button>
                         </a>
                         < Button disabled={ !hasBooks }
-                                 mode={ 'Pink' }
+                                 mode={ 'LightBlue' }
                                  title={ 'Go back' }
                                  onClick={ () => navigate( -1 ) }
                         >
-                            Back to List</Button>
+                            <MaterialIcon icon_name={ 'reply' }/>{' To List'}</Button>
                     </div>
                 </div>
             </div>

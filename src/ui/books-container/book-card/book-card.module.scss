@@ -6,14 +6,15 @@
   flex: 0 1 rem(300);
   text-align: center;
   padding: rem(15);
-  box-shadow: black rem(7) rem(7) rem(8);
+  box-shadow: dimgray 0 rem(5) rem(8);
   margin-bottom: rem(25);
 }
 
 .image {
   height: rem(300);
   margin: rem(10) 0;
-  box-shadow: black rem(5) rem(5) rem(3);
+  box-shadow: #4b4b4b 0 rem(5) rem(8);
+  //box-shadow: black rem(5) rem(5) rem(3);
 }
 
 .category {

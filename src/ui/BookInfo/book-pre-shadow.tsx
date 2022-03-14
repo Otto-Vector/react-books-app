@@ -32,22 +32,22 @@ export const BookPreShadow: React.FC = () => {
                             .map( ( e, i ) =>
                                 <PreloaderBar key={ i } height={ '1.7rem' }/> )
                     }
-
                 </p>
 
                 <div className={ classes.buttonsPanel }>
-                    <Button disabled={ true }
-                            mode={ 'Gray' }
-                            title={ 'PreButton' }
-                    >
-                        <div style={ { width: '5rem' } }><PreloaderBar/></div>
-                    </Button>
-                    < Button disabled={ true }
-                             mode={ 'Pink' }
-                             title={ 'PreButton' }
-                    >
-                        <div style={ { width: '5rem' } }><PreloaderBar/></div>
-                    </Button>
+                    { [ 'Pink', 'Gray' ]
+                        .map( ( e, i ) =>
+                            <Button disabled={ true }
+                                    key={ e + i }
+                                    mode={ e as 'Pink' | 'Gray' }
+                                    title={ 'PreButton' }
+                            >
+                                <div style={ { width: '5rem' } }>
+                                    <PreloaderBar/>
+                                </div>
+                            </Button> )
+                    }
+
                 </div>
             </div>
         </div>

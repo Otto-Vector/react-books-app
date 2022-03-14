@@ -3,12 +3,14 @@
 
 $btnBlueFontColor: #3A79FF;
 $btnBlueBgColor: #d2e1ff;
+$btnLightBlueFontColor: #7382A3;
+$btnLightBlueBgColor: #E8ECF4;
 $btnWhiteFontColor: #676e87;
 $btnWhiteBgColor: #FFFFFF;
 $btnPinkFontColor: #D43F3F;
 $btnPingBgColor: #FFD7D7;
-$btnGrayFontColor: #7382A3;
-$btnGrayBgColor: #E8ECF4;
+$btnGrayFontColor: #51525a;
+$btnGrayBgColor: #dcdcdc;
 $btnNoFillFontColor: #C7D3FF;
 $btnNoFillBgColor: transparent;
 $btnNoFillBorderColor: #A0B4FF;
@@ -29,18 +31,14 @@ $btnNoFillBorderColor: #A0B4FF;
   cursor: pointer;
   transition: all 0.2s ease-in-out;
 
-  //&:first-letter {
-  //  text-transform: uppercase;
-  //}
-
   &:hover {
     transform: translateY(-1px);
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 35%);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, .35);
   }
 
   &:active {
     transform: translateY(0);
-    box-shadow: 0 1px 5px rgba(0, 0, 0, 35%);
+    box-shadow: 0 1px 5px rgba(0, 0, 0, .35);
   }
 
   &:disabled {
@@ -66,9 +64,13 @@ $btnNoFillBorderColor: #A0B4FF;
     color: $btnPinkFontColor;
   }
 
+  &LightBlue {
+    background-color: $btnLightBlueBgColor;
+    color: $btnLightBlueFontColor;
+  }
+
   &Gray {
-    //font-weight: 500;
-    background-color: $btnGrayBgColor;
+        background-color: $btnGrayBgColor;
     color: $btnGrayFontColor;
   }
 
@@ -79,7 +81,6 @@ $btnNoFillBorderColor: #A0B4FF;
 
   &NoFill {
     padding: rem(12) rem(15);
-    //font-weight: 500;
     background-color: $btnNoFillBgColor;
     color: $btnNoFillFontColor;
     border: 1px solid $btnNoFillBorderColor;

@@ -7,8 +7,9 @@
     justify-content: space-around;
     background-color: whitesmoke;
     font-size: 1.2rem;
-    padding: rem(20);
-    box-shadow: black rem(7) rem(7) rem(8);
+    padding: rem(40);
+    //box-shadow: black rem(7) rem(7) rem(8);
+    box-shadow: dimgray 0 rem(5) rem(8);
     margin: rem(25) auto;
 
         @include mq('tablet', 'max') {
@@ -29,7 +30,7 @@
 .image {
     width: 50%;
     margin: rem(15);
-    //box-shadow: black rem(5) rem(5) rem(3);
+    box-shadow: #4b4b4b 0 rem(5) rem(8);
 }
 
 .category {
@@ -41,14 +42,14 @@
 .bookName {
     text-align: left;
     color: $black-75;
-    font-size: 1.5rem;
+    font-size: 1.8rem;
     font-weight: bold;
-    padding-top: rem(5);
+    padding: rem(15) 0;
 }
 
 .authors {
     text-align: left;
-    padding: rem(7) 0;
+    padding-bottom: rem(15);
     color: gray;
 }
 
