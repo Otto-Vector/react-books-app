@@ -2,35 +2,43 @@
 @import "src/styles/mixins";
 
 .container {
-  background-color: whitesmoke;
-  flex: 0 1 rem(300);
-  text-align: center;
-  padding: rem(15);
-  box-shadow: dimgray 0 rem(5) rem(8);
-  margin-bottom: rem(25);
+    background-color: whitesmoke;
+    flex: 0 1 rem(300);
+    text-align: center;
+    padding: rem(15);
+    box-shadow: dimgray 0 rem(5) rem(8);
+    margin-bottom: rem(25);
+
+    &:hover {
+        background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' height='24px' viewBox='0 0 24 24' width='24px' fill='%233D4F9F50'%3e%3cpath d='M0 0h24v24H0V0z' fill='none'/%3e%3cpath d='M12 6c3.79 0 7.17 2.13 8.82 5.5C19.17 14.87 15.79 17 12 17s-7.17-2.13-8.82-5.5C4.83 8.13 8.21 6 12 6m0-2C7 4 2.73 7.11 1 11.5 2.73 15.89 7 19 12 19s9.27-3.11 11-7.5C21.27 7.11 17 4 12 4zm0 5c1.38 0 2.5 1.12 2.5 2.5S13.38 14 12 14s-2.5-1.12-2.5-2.5S10.62 9 12 9m0-2c-2.48 0-4.5 2.02-4.5 4.5S9.52 16 12 16s4.5-2.02 4.5-4.5S14.48 7 12 7z'/%3e%3c/svg%3e");
+        background-repeat: no-repeat;
+        background-size: 6%;
+        background-position: 96% 2%;
+    }
 }
 
 .image {
-  height: rem(300);
-  margin: rem(10) 0;
-  box-shadow: #4b4b4b 0 rem(5) rem(8);
-  //box-shadow: black rem(5) rem(5) rem(3);
+    height: rem(300);
+    margin: rem(10) 0;
+    box-shadow: #4b4b4b 0 rem(5) rem(8);
 }
 
 .category {
-  text-align: left;
-  padding-top: rem(10);
-  text-decoration-line: underline;
+    text-align: left;
+    padding-top: rem(10);
+    text-decoration-line: underline;
+    color: $mainFontColor;
 }
 
 .bookName {
     text-align: left;
-  padding-top: rem(5);
-  font-weight: bold;
+    padding-top: rem(5);
+    font-weight: bold;
+    color: black;
 }
 
 .authors {
     text-align: left;
-  padding-top: rem(7);
-  color: gray;
+    padding-top: rem(7);
+    color: gray;
 }

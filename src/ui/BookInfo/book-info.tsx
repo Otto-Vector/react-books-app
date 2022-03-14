@@ -20,7 +20,7 @@ export const BookInfo: React.FC = () => {
     const { foundedBook } = useSelector( getBookToView )
 
     // для кнопки "назад" если мы зашли не из списка, то некуда возвращаться
-    const hasBooks = useSelector( getTotalBooksNumber )
+    const totalBooks = useSelector( getTotalBooksNumber )
     // для кнопки "назад"
     const navigate = useNavigate()
 
@@ -67,7 +67,7 @@ export const BookInfo: React.FC = () => {
                             >
                                 <MaterialIcon icon_name={ 'menu_book' }/>{ ' Read' }</Button>
                         </a>
-                        < Button disabled={ !hasBooks }
+                        < Button disabled={ totalBooks <= 0 }
                                  mode={ 'LightBlue' }
                                  title={ 'Go back' }
                                  onClick={ () => navigate( -1 ) }
