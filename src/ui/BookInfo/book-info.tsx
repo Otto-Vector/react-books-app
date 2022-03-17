@@ -52,10 +52,10 @@ export const BookInfo: React.FC = () => {
                          src={ imageLinks?.thumbnail || imageLinks?.smallThumbnail || anyBookImage }/>
                 </div>
                 <div className={ classes.side }>
-                    <p className={ classes.category }>{ categories.join(' / ') }</p>
+                    <div className={ classes.category }>{ categories.join( ' / ' ) }</div>
                     <h2 className={ classes.bookName } title={ 'Book header' }>{ title }</h2>
-                    <article className={ classes.authors } title={ 'Authors' }>{ authors.join(' | ') }</article>
-                    <p className={ classes.description }>{ removeAllHTMLTags( description ) }</p>
+                    <article className={ classes.authors } title={ 'Authors' }>{ authors.join( ' | ' ) }</article>
+                    <div className={ classes.description }>{ removeAllHTMLTags( description ) }</div>
 
                     <div className={ classes.buttonsPanel }>
                         <a href={ previewLink }
@@ -67,10 +67,10 @@ export const BookInfo: React.FC = () => {
                             >
                                 <MaterialIcon icon_name={ 'menu_book' }/>{ ' Read' }</Button>
                         </a>
-                        < Button disabled={ totalBooks <= 0 }
-                                 mode={ 'LightBlue' }
-                                 title={ 'Go back' }
-                                 onClick={ () => navigate( -1 ) }
+                        <Button disabled={ totalBooks <= 0 }
+                                mode={ 'LightBlue' }
+                                title={ 'Go back' }
+                                onClick={ () => navigate( -1 ) }
                         >
                             <MaterialIcon icon_name={ 'reply' }/>{ ' To List' }</Button>
                     </div>

@@ -180,9 +180,7 @@ export const getOneBookFromApi = ( bookId: string ): UsersReducerThunkActionType
             const response = await getOneBookOverIdFromApi( bookId )
             dispatch( requestFormActions.setFoundedBook( response as BookInfoType ) )
         } catch (e) {
-
-            // dispatch( requestFormActions.setFoundedBook( null ) )
-            dispatch( requestFormActions.setApiError( `Book with id ${ bookId } not found` ) )
+            dispatch( requestFormActions.setApiError( `Not found book with id: ${ bookId } ` ) )
         }
 
     }

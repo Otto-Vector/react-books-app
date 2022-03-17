@@ -1,7 +1,6 @@
 
 .wrapper {
   width: 100%;
-  //height: 1.5rem;
   padding: .4rem;
 }
 
@@ -12,16 +11,12 @@
   box-shadow: 2px 2px 4px rgba(0, 0, 0, .7);
 
   background-image: linear-gradient(45deg, silver 47%, GoldenRod 50%, silver 53%);
-
   background-size: 250% 250%;
-  animation: gradient 4s ease infinite;
+  animation: bgPositionKey 4s ease infinite;
 }
 
-@keyframes gradient {
+@keyframes bgPositionKey {
   0% {
-    background-position: 100% 50%;
-  }
-  100% {
-    background-position: 0 50%;
+    background-position: 100% 100%;
   }
 }
