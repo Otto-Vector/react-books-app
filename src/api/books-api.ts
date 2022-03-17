@@ -44,22 +44,6 @@ export const getBooksFromApi = ( { bookName, categories, orderBy }: BooksRequest
         .then( response => response.data )
 }
 
-
-// сообщение об ошибке, когда книга не найдена
-// export type BookInfoErrorType = {
-//     error: {
-//         code: number,
-//         message: string,
-//         errors: [
-//             {
-//                 message: string,
-//                 domain: string,
-//                 reason: string
-//             }
-//         ]
-//     }
-// }
-
 // загрузка одной книги по ID
 export const getOneBookOverIdFromApi = ( BookId: string ) => {
     return instance.get<BookInfoType>( `volumes/${ BookId }` )

@@ -31,7 +31,7 @@ export const BookInfo: React.FC = () => {
             // запрашиваем книгу из API
             dispatch( getOneBookFromApi( bookId || 'test' ) )
         }
-    }, [] )
+    }, [ bookId, foundedBook?.id, dispatch ] )
 
     // предзагрузочная форма при обновлении запроса
     if (foundedBook === null || foundedBook.id !== bookId) return <BookPreShadow/>
@@ -52,9 +52,9 @@ export const BookInfo: React.FC = () => {
                          src={ imageLinks?.thumbnail || imageLinks?.smallThumbnail || anyBookImage }/>
                 </div>
                 <div className={ classes.side }>
-                    <p className={ classes.category }>{ categories }</p>
-                    <h2 className={ classes.bookName } title={'Book header'}>{ title }</h2>
-                    <article className={ classes.authors } title={'Authors'}>{ authors }</article>
+                    <p className={ classes.category }>{ categories.join(' / ') }</p>
+                    <h2 className={ classes.bookName } title={ 'Book header' }>{ title }</h2>
+                    <article className={ classes.authors } title={ 'Authors' }>{ authors.join(' | ') }</article>
                     <p className={ classes.description }>{ removeAllHTMLTags( description ) }</p>
 
                     <div className={ classes.buttonsPanel }>
@@ -72,7 +72,7 @@ export const BookInfo: React.FC = () => {
                                  title={ 'Go back' }
                                  onClick={ () => navigate( -1 ) }
                         >
-                            <MaterialIcon icon_name={ 'reply' }/>{' To List'}</Button>
+                            <MaterialIcon icon_name={ 'reply' }/>{ ' To List' }</Button>
                     </div>
                 </div>
             </div>

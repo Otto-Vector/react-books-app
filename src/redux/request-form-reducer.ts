@@ -180,10 +180,9 @@ export const getOneBookFromApi = ( bookId: string ): UsersReducerThunkActionType
             const response = await getOneBookOverIdFromApi( bookId )
             dispatch( requestFormActions.setFoundedBook( response as BookInfoType ) )
         } catch (e) {
-            dispatch( requestFormActions.setFoundedBook( null ) )
-            dispatch( requestFormActions.setApiError( 'НЕ НАЙДЕНО КНИГ ПО ДАННОМУ iD: ' + bookId ) )
-            // alert( 'НЕ НАЙДЕНО КНИГ ПО ДАННОМУ iD: ' + bookId )
-            // alert( 'ошибка сервера: ' + e )
+
+            // dispatch( requestFormActions.setFoundedBook( null ) )
+            dispatch( requestFormActions.setApiError( `Book with id ${ bookId } not found` ) )
         }
 
     }
