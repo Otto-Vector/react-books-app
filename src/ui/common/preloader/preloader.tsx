@@ -1,6 +1,6 @@
 import React from 'react'
 import styles from './preloader.module.scss'
-import preLoader from '../../../images/Spinner.svg'
+import preLoader from './spinner.svg'
 
 
 type OwnProps = {

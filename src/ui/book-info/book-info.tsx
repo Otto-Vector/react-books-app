@@ -19,7 +19,7 @@ export const BookInfo: React.FC = () => {
     const { bookId } = useParams<{ bookId: string | undefined }>()
     const { foundedBook } = useSelector( getBookToView )
 
-    // для кнопки "назад" если мы зашли не из списка, то некуда возвращаться
+    // для кнопки "назад" если мы зашли не из списка, то инициируемое значение -1
     const totalBooks = useSelector( getTotalBooksNumber )
     // для кнопки "назад"
     const navigate = useNavigate()
@@ -52,7 +52,7 @@ export const BookInfo: React.FC = () => {
                          src={ imageLinks?.thumbnail || imageLinks?.smallThumbnail || anyBookImage }/>
                 </div>
                 <div className={ classes.side }>
-                    <div className={ classes.category }>{ categories.join( ' / ' ) }</div>
+                    <div className={ classes.category }>{ categories?.join( ' / ' ) || 'Unknown category' }</div>
                     <h2 className={ classes.bookName } title={ 'Book header' }>{ title }</h2>
                     <article className={ classes.authors } title={ 'Authors' }>{ authors.join( ' | ' ) }</article>
                     <div className={ classes.description }>{ removeAllHTMLTags( description ) }</div>
