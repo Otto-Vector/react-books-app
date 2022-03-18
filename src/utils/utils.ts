@@ -1,2 +1,2 @@
-export const removeAllHTMLTags = ( text: string ): string =>
-    text.replace( /<.+?>/g, '' ).replace( /&nbsp;/ig, '' )
+export const removeAllHTMLTags = ( text?: string ): string | undefined =>
+    text?.replace( /<.+?>/g, '' ).replace( /&nbsp;/ig, '' )

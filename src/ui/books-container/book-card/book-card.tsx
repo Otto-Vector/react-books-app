@@ -21,11 +21,9 @@ export const BookCard: React.FC<ComponentProps> = (
     } ) => {
 
     return <Link to={ '/book/' + id } className={ classes.container }>
-        {/*<div className={classes.container}>*/ }
         <img className={ classes.image } alt={ 'bookName' } src={ imageUrl }/>
         <div className={ classes.category }>{ category || 'Unknown category' }</div>
         <div className={ classes.bookName }>{ title }</div>
         <p className={ classes.authors }>{ authors }</p>
-        {/*</div>*/ }
     </Link>
 }

@@ -8,7 +8,6 @@
     background-color: whitesmoke;
     font-size: 1.2rem;
     padding: rem(40);
-    //box-shadow: black rem(7) rem(7) rem(8);
     box-shadow: dimgray 0 rem(5) rem(8);
     margin: rem(25) auto;
 
@@ -55,6 +54,7 @@
 
 .description {
     color: black;
+    min-height: 10rem;
     line-height: 1.7rem;
     text-align: justify;
     padding: 1rem;

@@ -55,7 +55,7 @@ export const BookInfo: React.FC = () => {
                     <div className={ classes.category }>{ categories?.join( ' / ' ) || 'Unknown category' }</div>
                     <h2 className={ classes.bookName } title={ 'Book header' }>{ title }</h2>
                     <article className={ classes.authors } title={ 'Authors' }>{ authors.join( ' | ' ) }</article>
-                    <div className={ classes.description }>{ removeAllHTMLTags( description ) }</div>
+                    <div className={ classes.description }>{ removeAllHTMLTags( description ) || 'No description yet' }</div>
 
                     <div className={ classes.buttonsPanel }>
                         <a href={ previewLink }
