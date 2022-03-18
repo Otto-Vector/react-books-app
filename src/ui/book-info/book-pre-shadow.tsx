@@ -1,8 +1,8 @@
 import React from 'react'
 import classes from './book-info.module.scss'
-import { Button } from '../common/Button/Button'
+import { Button } from '../common/button/button'
 import anyBookImage from '../../images/open-book.png'
-import { PreloaderBar } from '../common/PreloaderBar/PreloaderBar'
+import { PreloaderBar } from '../common/preloader-bar/preloader-bar'
 import { useSelector } from 'react-redux'
 import { getApiError } from '../../selectors/request-form-selectors'
 

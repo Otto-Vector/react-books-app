@@ -7,7 +7,7 @@ import {
     Route,
     Routes,
 } from 'react-router-dom'
-import { BookInfo } from './BookInfo/book-info'
+import { BookInfo } from './book-info/book-info'
 
 export const UiComponent: React.FC = () => {
 

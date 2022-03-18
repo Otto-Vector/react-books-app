@@ -20,7 +20,7 @@ export const Button: React.FC<OwnProps> = (
                    onClick={ onClick }
                    type={ type }
                    title={title}
-    >{ // отображаем то что внутри тега Button
+    >{ // отображаем то что внутри тега button
         children
     }
     </button>

@@ -1,5 +1,5 @@
 import React from 'react'
-import styles from './FormType.module.scss'
+import styles from './form-type.module.scss'
 import { FieldState, FormApi } from 'final-form'
 
 type OwnProps = {

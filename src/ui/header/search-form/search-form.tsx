@@ -2,12 +2,12 @@ import React from 'react'
 import styles from './search-form.module.scss'
 
 import { Field, Form } from 'react-final-form'
-import { Input } from '../../common/FormType/FormType'
+import { Input } from '../../common/form-type/form-type'
 import { composeValidators, required } from '../../../utils/validators'
 import { BooksRequest } from '../../../types/books-api-types'
 import { useSelector } from 'react-redux'
 import { AppStateType } from '../../../redux/redux-store'
-import { Button } from '../../common/Button/Button'
+import { Button } from '../../common/button/button'
 
 
 type OwnProps = {

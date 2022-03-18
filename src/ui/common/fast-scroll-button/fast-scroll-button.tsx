@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import styles from './FastScrollButton.module.scss'
+import styles from './fast-scroll-button.module.scss'
 
 type OwnProps = {
     goTo: 'top' | 'bottom',

@@ -2,18 +2,18 @@ import React from 'react'
 import classes from './books-container.module.scss'
 import anyBookImage from '../../images/AnyBook.jpg'
 import { useDispatch, useSelector } from 'react-redux'
-import Counter from './Counter/Counter'
-import { Preloader } from '../common/preloader/Preloader'
+import { Counter } from './counter/counter'
+import { Preloader } from '../common/preloader/preloader'
 import { BookCard } from './book-card/book-card'
 import { getBooks, requestFormActions } from '../../redux/request-form-reducer'
-import { Button } from '../common/Button/Button'
+import { Button } from '../common/button/button'
 import {
     getBooksList, getIsFetching,
     getPagination,
     getRequestBooks,
     getTotalBooksNumber,
 } from '../../selectors/request-form-selectors'
-import { FastScrollButton } from '../common/GoToScrollButton/FastScrollButton'
+import { FastScrollButton } from '../common/fast-scroll-button/fast-scroll-button'
 
 const { nextIndex } = requestFormActions
 
