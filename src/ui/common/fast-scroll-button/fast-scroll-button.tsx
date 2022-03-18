@@ -24,6 +24,8 @@ export const FastScrollButton: React.FC<OwnProps> = (
 
     useEffect( () => { // реализация визуализации кнопки
         window.addEventListener( 'scroll', handleVisibleButton )
+        // отписка от события
+        return () => window.removeEventListener( 'scroll', handleVisibleButton )
     }, [] )
 
     return (
