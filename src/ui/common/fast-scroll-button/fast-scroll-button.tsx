@@ -2,13 +2,13 @@ import React, { useEffect, useState } from 'react'
 import styles from './fast-scroll-button.module.scss'
 
 type OwnProps = {
-    goTo: 'top' | 'bottom',
+    mode: 'top' | 'bottom',
     title?: string,
 }
 
 export const FastScrollButton: React.FC<OwnProps> = (
     {
-        goTo, // два режима "вверх" и вниз
+        mode, // два режима "вверх" и вниз
         title, // описание кнопки при наведении курсора мыши
     } ) => {
 
@@ -19,7 +19,7 @@ export const FastScrollButton: React.FC<OwnProps> = (
     }
 
     const handleScrollUp = () => { // куда необходимо скроллиться при нажатии на кнопку
-        window.scrollTo( { left: 0, top: (goTo === 'top' ? 0 : 10000000), behavior: 'smooth' } )
+        window.scrollTo( { left: 0, top: (mode === 'top' ? 0 : 10000000), behavior: 'smooth' } )
     }
 
     useEffect( () => { // реализация визуализации кнопки
@@ -31,11 +31,11 @@ export const FastScrollButton: React.FC<OwnProps> = (
     return (
         <button type={ 'button' }
                 className={ styles.scrollButton + ' ' + (showGoTop ? '' : styles.scrollButtonHidden) }
-                title={ title || `Go ${ goTo }` }
+                title={ title || `Go ${ mode }` }
                 onClick={ handleScrollUp }
         >
                 <span className={ styles.scrollButtonIcon }>{
-                    `expand_${ goTo === 'top' ? 'less' : 'more' }`
+                    `expand_${ mode === 'top' ? 'less' : 'more' }`
                 }
                 </span>
         </button>

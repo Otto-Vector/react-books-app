@@ -77,8 +77,8 @@ export const BooksContainer: React.FC<OwnProps> = () => {
             </div> }
             <div className={ classes.scrollButtonsPanelFixed }>
                 <div className={ classes.scrollButtonsPanel }>
-                    <FastScrollButton goTo={ 'top' }/>
-                    <FastScrollButton goTo={ 'bottom' }/>
+                    <FastScrollButton mode={ 'top' }/>
+                    <FastScrollButton mode={ 'bottom' }/>
                 </div>
             </div>
 
