@@ -71,13 +71,18 @@ export type BooksApiResponseType = {
 }
 
 // types for forms
-export type SortingByType = 'newest' | 'relevance'
-export type CategoriesType = 'all' | 'art' | 'biography' | 'computers' | 'history' | 'medical' | 'poetry'
+export const CategoriesTypeArr = [ 'all', 'art', 'biography', 'computers', 'history', 'medical', 'poetry' ] as const;
+export const OrderByTypeArr = [ 'relevance', 'newest'] as const
+// export type SortingByType = 'newest' | 'relevance'
+export type OrderByType = typeof OrderByTypeArr[number]
+// export type CategoriesType = 'all' | 'art' | 'biography' | 'computers' | 'history' | 'medical' | 'poetry'
+export type CategoriesType = typeof CategoriesTypeArr[number]
+
 
 export type BooksRequest = {
     bookName: string
     categories: CategoriesType
-    orderBy: SortingByType
+    orderBy: OrderByType
 }
 
 export type PaginationType = {
