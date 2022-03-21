@@ -6,26 +6,27 @@ import { Input } from '../../common/form-type/form-type'
 import { composeValidators, required } from '../../../utils/validators'
 import { BooksRequest } from '../../../types/books-api-types'
 import { useSelector } from 'react-redux'
-import { AppStateType } from '../../../redux/redux-store'
 import { Button } from '../../common/button/button'
+import { getSelectFormsProps } from '../../../selectors/request-form-selectors'
 
 
 type OwnProps = {
     onSubmit: ( searchForm: BooksRequest ) => void
 }
 
-const SearchForm: React.FC<OwnProps> = ( { onSubmit } ) => {
+export const SearchForm: React.FC<OwnProps> = ( { onSubmit } ) => {
 
-    const selectProps = useSelector( ( state: AppStateType ) => state.requestFormReducer.selectProps )
+    const { categories, orderBy } = useSelector( getSelectFormsProps )
+    const initialValues = {
+        bookName: '',
+        categories: 'all',
+        orderBy: 'relevance',
+    } as BooksRequest
 
     return (
         <Form
             onSubmit={ onSubmit }
-            initialValues={ {
-                bookName: '',
-                categories: 'all',
-                orderBy: 'relevance',
-            } as BooksRequest }
+            initialValues={ initialValues }
             render={
                 ( { submitError, handleSubmit, pristine, form, submitting } ) => (
                     <form onSubmit={ handleSubmit }>
@@ -40,7 +41,7 @@ const SearchForm: React.FC<OwnProps> = ( { onSubmit } ) => {
                             <div className={ styles.dropdown }>
                                 <label className={ styles.label }>{ 'Categories' }</label>
                                 <Field className={ styles.select } name={ 'categories' } component={ 'select' }>
-                                    { selectProps.categories.map( value =>
+                                    { categories.map( value =>
                                         <option value={ value } key={ value }>{ value }</option> )
                                     }
                                 </Field>
@@ -48,7 +49,7 @@ const SearchForm: React.FC<OwnProps> = ( { onSubmit } ) => {
                             <div className={ styles.dropdown }>
                                 <label className={ styles.label }>{ 'Sorting by' }</label>
                                 <Field className={ styles.select } name={ 'orderBy' } component={ 'select' }>
-                                    { selectProps.orderBy.map( value =>
+                                    { orderBy.map( value =>
                                         <option value={ value } key={ value }>{ value }</option> )
                                     }
                                 </Field>
@@ -71,5 +72,3 @@ const SearchForm: React.FC<OwnProps> = ( { onSubmit } ) => {
             }/>
     )
 }
-
-export default SearchForm

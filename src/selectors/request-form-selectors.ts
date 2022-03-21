@@ -7,6 +7,8 @@ export const getIsFetching: RequestFormSelectors<'isFetching'> = ( state ) => st
 export const getBooksList: RequestFormSelectors<'books'> = ( state ) => state.requestFormReducer.books
 export const getRequestBooks: RequestFormSelectors<'request'> = ( state ) => state.requestFormReducer.request
 export const getPagination: RequestFormSelectors<'pagination'> = ( state ) => state.requestFormReducer.pagination
+export const getSelectFormsProps: RequestFormSelectors<'selectFormProps'> = ( state ) => state.requestFormReducer.selectFormProps
+
 export const getTotalBooksNumber: RequestFormSelectors<'totalBooks'> = ( state ) => state.requestFormReducer.totalBooks
 export const getBookToView: RequestFormSelectors<'bookToView'> = ( state ) => state.requestFormReducer.bookToView
 export const getApiError: RequestFormSelectors<'apiError'> = ( state ) => state.requestFormReducer.apiError

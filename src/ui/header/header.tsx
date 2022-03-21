@@ -1,14 +1,14 @@
 import React from 'react'
 import classes from './header.module.scss'
 import bgBooks2 from '../../images/bg_books2.png'
-import SearchForm from './search-form/search-form'
-import { BooksRequest } from '../../types/books-api-types'
+import { SearchForm } from './search-form/search-form'
 import { getBooks, requestFormActions } from '../../redux/request-form-reducer'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { getPagination } from '../../selectors/request-form-selectors'
 
-const { clearBooksList, nextIndex, saveRequest } = requestFormActions
+import { BooksRequest } from '../../types/books-api-types'
+
 
 const headerStyle: React.CSSProperties = {
     // вставил так, пока не знаю как правильно воткнуть ссылку на картинку в bg
@@ -24,15 +24,16 @@ export const Header: React.FC<OwnProps> = () => {
     const dispatch = useDispatch()
     const pagination = useSelector( getPagination )
 
+    // для формы ввода
     const onSubmit = ( searchForm: BooksRequest ) => {
         // возвращаем на страницу поиска
         navigate( '/search' )
         // возвращаем на нулевой индеск
-        dispatch( nextIndex( 0 ) )
+        dispatch( requestFormActions.nextIndex( 0 ) )
         // очищаем список книг
-        dispatch( clearBooksList() )
+        dispatch( requestFormActions.clearBooksList() )
         // сохраняем данные запроса
-        dispatch( saveRequest( searchForm ) )
+        dispatch( requestFormActions.saveRequest( searchForm ) )
         // отправляем запрос
         dispatch( getBooks( searchForm, { ...pagination, startIndex: 0 } ) )
     }

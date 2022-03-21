@@ -7,17 +7,17 @@ import { BookInfoType } from './initial-book'
 const initialState = {
     books: [] as ItemBook[],
     totalBooks: -1, // минус один, чтобы до первого поиска не отображалось количество найденных книг равное нулю
-    isFetching: false,
+    isFetching: false, // статус прогрузки на странице "/search"
     pagination: { // запрос на количество книг
         maxResults: 30, // максимум - 40
-        startIndex: 0,
+        startIndex: 0, // с какого индекса выводить результат поиска
     } as PaginationType,
-    request: { // сам запрос на книгу
+    request: { // сам запрос на книгу (по умолчанию)
         orderBy: 'relevance',
         categories: 'all',
         bookName: '',
     } as BooksRequest,
-    selectProps: { // параметры выбора в селекторах
+    selectFormProps: { // параметры выбора в селекторах
         categories: [ 'all', 'art', 'biography', 'computers', 'history', 'medical', 'poetry' ],
         orderBy: [ 'relevance', 'newest' ],
     },
