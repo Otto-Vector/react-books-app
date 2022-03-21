@@ -2,10 +2,10 @@ import { ThunkAction } from 'redux-thunk'
 import { AppStateType, GetActionsTypes } from './redux-store'
 import {
     BooksRequest,
-    CategoriesType,
     ItemBook,
     PaginationType,
-    OrderByType, CategoriesTypeArr, OrderByTypeArr,
+    CategoriesTypeArr,
+    OrderByTypeArr,
 } from '../types/books-api-types'
 import { getBooksFromApi, getOneBookOverIdFromApi } from '../api/books-api'
 import { BookInfoType } from './initial-book'
@@ -24,8 +24,8 @@ const initialState = {
         bookName: '',
     } as BooksRequest,
     selectFormProps: { // параметры выбора в селекторах
-        categories: [ 'all', 'art', 'biography', 'computers', 'history', 'medical', 'poetry' ] as typeof CategoriesTypeArr,
-        orderBy: [ 'relevance', 'newest' ] as typeof OrderByTypeArr,
+        categories: CategoriesTypeArr,
+        orderBy: OrderByTypeArr,
     },
     bookToView: {
         bookId: undefined as undefined | string,
