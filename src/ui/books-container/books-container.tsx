@@ -29,23 +29,21 @@ export const BooksContainer: React.FC<OwnProps> = () => {
     const totalBooks = useSelector( getTotalBooksNumber )
     const books = useSelector( getBooksList )
 
+    // вычисляем следующий индекс на запрос
+    const nextIndex = startIndex + maxResults
+    const booksLeft = totalBooks - nextIndex
+    const isLastPage = booksLeft < 1
+
     const nextPage = () => {
-        const _nextIndex = startIndex + maxResults
-        dispatch( requestFormActions.nextIndex( _nextIndex ) )
-        dispatch( getBooks( request, { maxResults, startIndex: _nextIndex } ) )
+        dispatch( requestFormActions.nextIndex( nextIndex ) )
+        dispatch( getBooks( request, { maxResults, startIndex: nextIndex } ) )
     }
 
-    const lastPage = (): boolean => {
-        return (totalBooks - (startIndex + maxResults)) <= 0
-    }
+    const loadMoreBooksLeft = (): string => `${ isLastPage ? 0 : booksLeft } more`
 
-    const loadMoreBooksLeft = (): string => {
-        const total = totalBooks - books.length
-        return `${ total < 1 ? 0 : total } more`
-    }
 
     return (<div>
-            { isFetching || totalBooks<0 || <Counter totalBooks={ totalBooks }/> }
+            { isFetching || totalBooks < 0 || <Counter totalBooks={ totalBooks }/> }
             <div className={ classes.booksContainer }>
                 { books.length > 0
                     ? books.map( ( {
@@ -53,13 +51,14 @@ export const BooksContainer: React.FC<OwnProps> = () => {
                                        volumeInfo: {
                                            imageLinks, categories, title, authors,
                                        },
-                                   } ) => {
-                        return <BookCard key={ id }
+                                   }, index ) => {
+                        return <BookCard key={ id+index }
                                          id={ id }
                                          imageUrl={ imageLinks?.thumbnail || imageLinks?.smallThumbnail || anyBookImage }
                                          category={ categories }
                                          title={ title }
                                          authors={ authors }
+                                         index={ index + 1 }
                         />
                     } )
                     : isFetching && <Preloader hSize={ '50rem' }/>
@@ -67,7 +66,7 @@ export const BooksContainer: React.FC<OwnProps> = () => {
             </div>
             { (books.length !== 0) &&
             <div className={ classes.bottomWrapper }>
-              <Button disabled={ isFetching || lastPage() }
+              <Button disabled={ isFetching || isLastPage }
                       onClick={ nextPage }
                       mode={ 'Orange' }
                       title={ loadMoreBooksLeft() }

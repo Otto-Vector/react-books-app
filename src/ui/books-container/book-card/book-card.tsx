@@ -13,17 +13,18 @@ type ComponentProps = {
     category: string[]
     title: string
     authors: string[]
+    index: number
 }
 
 export const BookCard: React.FC<ComponentProps> = (
     {
-        id, imageUrl, category, title, authors,
+        id, imageUrl, category, title, authors, index,
     } ) => {
 
-    return <Link to={ '/book/' + id } className={ classes.container }>
+    return <Link to={ '/book/' + id } className={ classes.container } title={ index.toString() }>
         <img className={ classes.image } alt={ 'bookName' } src={ imageUrl }/>
         <div className={ classes.category }>{ category || 'Unknown category' }</div>
         <div className={ classes.bookName }>{ title }</div>
-        <p className={ classes.authors }>{ authors?.join(' | ') || 'AUTHOR NOT DEFINED'}</p>
+        <p className={ classes.authors }>{ authors?.join( ' | ' ) || 'AUTHOR NOT DEFINED' }</p>
     </Link>
 }

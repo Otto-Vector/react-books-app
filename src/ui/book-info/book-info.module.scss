@@ -11,7 +11,7 @@
     box-shadow: dimgray 0 rem(5) rem(8);
     margin: rem(25) auto;
 
-        @include mq('tablet', 'max') {
+    @include mq('tablet', 'max') {
         flex-wrap: wrap;
     }
 }
