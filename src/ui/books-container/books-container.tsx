@@ -8,14 +8,14 @@ import { BookCard } from './book-card/book-card'
 import { getBooks, requestFormActions } from '../../redux/request-form-reducer'
 import { Button } from '../common/button/button'
 import {
-    getBooksList, getIsFetching,
+    getBooksList,
+    getIsFetching,
     getPagination,
     getRequestBooks,
     getTotalBooksNumber,
 } from '../../selectors/request-form-selectors'
 import { FastScrollButton } from '../common/fast-scroll-button/fast-scroll-button'
 
-const { nextIndex } = requestFormActions
 
 type OwnProps = {}
 
@@ -31,7 +31,7 @@ export const BooksContainer: React.FC<OwnProps> = () => {
 
     const nextPage = () => {
         const _nextIndex = startIndex + maxResults
-        dispatch( nextIndex( _nextIndex ) )
+        dispatch( requestFormActions.nextIndex( _nextIndex ) )
         dispatch( getBooks( request, { maxResults, startIndex: _nextIndex } ) )
     }
 
@@ -39,7 +39,7 @@ export const BooksContainer: React.FC<OwnProps> = () => {
         return (totalBooks - (startIndex + maxResults)) <= 0
     }
 
-    const booksLeft = (): string => {
+    const loadMoreBooksLeft = (): string => {
         const total = totalBooks - books.length
         return `${ total < 1 ? 0 : total } more`
     }
@@ -70,7 +70,7 @@ export const BooksContainer: React.FC<OwnProps> = () => {
               <Button disabled={ isFetching || lastPage() }
                       onClick={ nextPage }
                       mode={ 'Orange' }
-                      title={ booksLeft() }
+                      title={ loadMoreBooksLeft() }
               >  { isFetching && <Preloader hSize={ '2rem' }/> }
                   { ' Load more' }
               </Button>

@@ -6,6 +6,7 @@ import { PreloaderBar } from '../common/preloader-bar/preloader-bar'
 import { useSelector } from 'react-redux'
 import { getApiError } from '../../selectors/request-form-selectors'
 
+
 export const BookPreShadow: React.FC = () => {
 
     const apiError = useSelector( getApiError )

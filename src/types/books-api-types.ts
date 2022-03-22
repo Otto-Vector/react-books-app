@@ -70,10 +70,11 @@ export type BooksApiResponseType = {
     items: ItemBook[]
 }
 
-// types for forms
+// types for form selectors
 export const CategoriesTypeArr = [ 'all', 'art', 'biography', 'computers', 'history', 'medical', 'poetry' ] as const;
 export const OrderByTypeArr = [ 'relevance', 'newest'] as const
 // export type SortingByType = 'newest' | 'relevance'
+// https://melvingeorge.me/blog/convert-array-into-string-literal-union-type-typescript
 export type OrderByType = typeof OrderByTypeArr[number]
 // export type CategoriesType = 'all' | 'art' | 'biography' | 'computers' | 'history' | 'medical' | 'poetry'
 export type CategoriesType = typeof CategoriesTypeArr[number]

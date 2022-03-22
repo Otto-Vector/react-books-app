@@ -9,7 +9,7 @@ export const PreloaderBar: React.FC<OwnProps> = ( { height = '1.5rem' } ) => {
 
     return (
         <div className={ styles.wrapper } style={ { 'height': `${ height }` } }>
-            <div className={ styles.bar }></div>
+            <div className={ styles.bar }> </div>
         </div>
     )
 }

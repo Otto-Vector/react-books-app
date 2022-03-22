@@ -36,6 +36,7 @@ export const BookInfo: React.FC = () => {
     // предзагрузочная форма при обновлении запроса
     if (foundedBook === null || foundedBook.id !== bookId) return <BookPreShadow/>
     else {
+
         const {
             volumeInfo: {
                 imageLinks,
@@ -46,6 +47,7 @@ export const BookInfo: React.FC = () => {
                 previewLink,
             },
         } = foundedBook
+
         return (<div className={ classes.container }>
                 <div className={ classes.side }>
                     <img className={ classes.image } alt={ 'bookName' }
@@ -54,7 +56,7 @@ export const BookInfo: React.FC = () => {
                 <div className={ classes.side }>
                     <div className={ classes.category }>{ categories?.join( ' / ' ) || 'Unknown category' }</div>
                     <h2 className={ classes.bookName } title={ 'Book header' }>{ title }</h2>
-                    <article className={ classes.authors } title={ 'Authors' }>{ authors.join( ' | ' ) }</article>
+                    <article className={ classes.authors } title={ 'Authors' }>{ authors?.join( ' | ' ) || 'AUTHOR NOT DEFINED' }</article>
                     <div className={ classes.description }>{ removeAllHTMLTags( description ) || 'No description yet' }</div>
 
                     <div className={ classes.buttonsPanel }>
