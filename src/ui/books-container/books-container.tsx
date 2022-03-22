@@ -1,6 +1,6 @@
 import React from 'react'
 import classes from './books-container.module.scss'
-import anyBookImage from '../../images/AnyBook.jpg'
+import anyBookImage from '../../images/any-book-gray.jpg'
 import { useDispatch, useSelector } from 'react-redux'
 import { Counter } from './counter/counter'
 import { Preloader } from '../common/preloader/preloader'
@@ -29,7 +29,7 @@ export const BooksContainer: React.FC<OwnProps> = () => {
     const totalBooks = useSelector( getTotalBooksNumber )
     const books = useSelector( getBooksList )
 
-    // вычисляем следующий индекс на запрос
+    // вычисляем общеиспользуемые значения
     const nextIndex = startIndex + maxResults
     const booksLeft = totalBooks - nextIndex
     const isLastPage = booksLeft < 1
