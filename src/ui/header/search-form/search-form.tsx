@@ -59,7 +59,7 @@ export const SearchForm: React.FC<OwnProps> = ( { onSubmit } ) => {
                             <Button type={ 'submit' }
                                     disabled={ submitting }
                                     mode={ 'White' }
-                                    title={ 'Clear & New Search' }
+                                    title={ 'Clear results & New Search' }
                             >Done</Button>
                             <Button type={ 'reset' }
                                     disabled={ pristine || submitting }
