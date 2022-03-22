@@ -1,5 +1,5 @@
-
-export const initialBook = {
+// данные книги из запроса по ID - более полные и отличаются от стандартного типа, приходящего в массиве
+const bookInfoType = {
   "kind": "books#volume",
   "id": "lAqMDgAAQBAJ",
   "etag": "q8yDqXmw1Os",
@@ -76,4 +76,5 @@ export const initialBook = {
   }
 }
 
-export type BookInfoType = typeof initialBook
+// данные книги из запроса по ID - более полные и отличаются от стандартного типа, приходящего в массиве
+export type BookInfoType = typeof bookInfoType

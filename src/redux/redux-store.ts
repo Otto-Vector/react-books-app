@@ -1,32 +1,32 @@
-import {applyMiddleware, combineReducers, compose, createStore} from "redux";
-import thunkMiddleWare from "redux-thunk";
+import { applyMiddleware, combineReducers, compose, createStore } from 'redux'
+import thunkMiddleWare from 'redux-thunk'
 
-import requestFormReducer from "./request-form-reducer";
+import requestFormReducer from './request-form-reducer'
 
 
 const reducersObject = {
-  requestFormReducer
+    requestFormReducer,
 }
 
-const rootReducer = combineReducers(reducersObject)
+const rootReducer = combineReducers( reducersObject )
 
 type StateType = typeof rootReducer
 export type AppStateType = ReturnType<StateType>
 
 // создал тип с обязательным type среди возвращаемых ключей для actions
-export type ActionsAnyType = Record<string, (...args: any[]) => {type: string,[key: string]: any}>
+export type ActionsAnyType = Record<string, ( ...args: any[] ) => { type: string, [key: string]: any }>
 // комбайним все значения объекта
-export type PropertiesType<T> = T extends {[key: string]: infer U} ? U : never;
+export type PropertiesType<T> = T extends { [key: string]: infer U } ? U : never;
 // возвращаем комбайн возвращаемых значений, также extends-ом проверяем, является ли он типом ActionsAnyType
 // также удаляем вcе undefined и null
 export type GetActionsTypes<T extends ActionsAnyType> = NonNullable<ReturnType<PropertiesType<T>>>
 
 // для расширения reduxDevTool в браузере и отслеживания стейта
 // @ts-ignore
-const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
 
 // возвращаем стор вместе с санками
-const store = createStore(rootReducer, composeEnhancers(applyMiddleware(thunkMiddleWare)));
+const store = createStore( rootReducer, composeEnhancers( applyMiddleware( thunkMiddleWare ) ) )
 // let store = createStore(reducers, applyMiddleware(thunkMiddleWare));
 
 export default store

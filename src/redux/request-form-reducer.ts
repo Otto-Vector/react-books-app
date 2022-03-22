@@ -4,11 +4,11 @@ import {
     BooksRequest,
     ItemBook,
     PaginationType,
-    CategoriesTypeArr,
-    OrderByTypeArr,
+    categoriesArray,
+    orderByArray,
 } from '../types/books-api-types'
 import { getBooksFromApi, getOneBookOverIdFromApi } from '../api/books-api'
-import { BookInfoType } from './initial-book'
+import { BookInfoType } from '../types/book-info-type'
 
 const initialState = {
     books: [] as ItemBook[],
@@ -24,8 +24,8 @@ const initialState = {
         bookName: '',
     } as BooksRequest,
     selectFormProps: { // параметры выбора в селекторах
-        categories: CategoriesTypeArr,
-        orderBy: OrderByTypeArr,
+        categories: categoriesArray,
+        orderBy: orderByArray,
     },
     bookToView: {
         bookId: undefined as undefined | string,
@@ -190,4 +190,5 @@ export const getOneBookFromApi = ( bookId: string ): UsersReducerThunkActionType
         }
 
     }
+
 export default requestFormReducer

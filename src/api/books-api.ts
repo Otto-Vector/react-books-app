@@ -1,7 +1,7 @@
 import axios from 'axios'
 import { BooksApiResponseType, BooksRequest, PaginationType } from '../types/books-api-types'
 import * as queryString from 'querystring'
-import { BookInfoType } from '../redux/initial-book'
+import { BookInfoType } from '../types/book-info-type'
 
 const API_KEY = 'AIzaSyAYL_h8bTjemmcHhKGtf2V9-CtalYYMT04'
 
@@ -12,7 +12,7 @@ const instance = axios.create( {
 // запрос на сервер
 export const getBooksFromApi = ( { bookName, categories, orderBy }: BooksRequest,
                                  { startIndex = 0, maxResults = 30 }: PaginationType ) => {
-    // пока непосредственно по имени появляются небольшие списки, поэтому ищем непосредтвенно по "q"
+    // непосредственно по имени книги
     const intitle = `+intitle:${ bookName }`
     // категория книг (согласно селектора)
     const subject: string = categories === 'all' ? '' : `+subject:${ categories }`
@@ -24,6 +24,7 @@ export const getBooksFromApi = ( { bookName, categories, orderBy }: BooksRequest
     // создаём объект для query,
     const params = Object.fromEntries( Object
         .entries( {
+            // (q - ищет везде, включая текст описания и доступный текст книги)
             //q: ` ${ bookName }${ subject }`, // вариант, где ищется слово в книгах без привязки к названию
             q: `${ intitle }${ subject }`,
             orderBy, // фильтровать по возрастанию/убыванию
@@ -39,14 +40,13 @@ export const getBooksFromApi = ( { bookName, categories, orderBy }: BooksRequest
     )
     // меняем значение с процентного на нормальный запрос
     const decodedQuery = decodeURIComponent( queryString.stringify( params ) )
-
+    // возвращаем сам запрос
     return instance.get<BooksApiResponseType>( `volumes?${ decodedQuery }` )
         .then( response => response.data )
 }
 
 // загрузка одной книги по ID
-export const getOneBookOverIdFromApi = ( BookId: string ) => {
-    return instance.get<BookInfoType>( `volumes/${ BookId }` )
+export const getOneBookOverIdFromApi = ( bookId: string ) => {
+    return instance.get<BookInfoType>( `volumes/${ bookId }` )
         .then( response => response.data )
-
 }

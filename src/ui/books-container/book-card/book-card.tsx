@@ -21,11 +21,12 @@ export const BookCard: React.FC<ComponentProps> = (
         id, imageUrl, category, title, authors, index,
     } ) => {
 
+    const invisibleClass = ( field?: string[] ): string => ` ${ field ? '' : classes.invisible }`
+
     return <Link to={ '/book/' + id } className={ classes.container } title={ [ index, title ].join( ' - ' ) }>
         <img className={ classes.image } alt={ 'bookName' } src={ imageUrl }/>
-        <div
-            className={ classes.category + ' ' + (category ? ' ' : classes.unvisible) }>{ category || 'Unknown category' }</div>
+        <div className={ classes.category + invisibleClass( category ) }>{ category || 'Unknown category' }</div>
         <div className={ classes.bookName }>{ title }</div>
-        <p className={ classes.authors + ' ' + (authors ? ' ' : classes.unvisible) }>{ authors?.join( ' | ' ) || 'AUTHOR NOT DEFINED' }</p>
+        <p className={ classes.authors + invisibleClass( authors ) }>{ authors?.join( ' | ' ) || 'AUTHOR NOT DEFINED' }</p>
     </Link>
 }

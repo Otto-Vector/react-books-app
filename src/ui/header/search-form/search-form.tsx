@@ -3,7 +3,7 @@ import styles from './search-form.module.scss'
 
 import { Field, Form } from 'react-final-form'
 import { Input } from '../../common/form-type/form-type'
-import { composeValidators, required } from '../../../utils/validators'
+import { composeValidators, maxLength50, required } from '../../../utils/validators'
 import { BooksRequest } from '../../../types/books-api-types'
 import { useSelector } from 'react-redux'
 import { Button } from '../../common/button/button'
@@ -35,7 +35,7 @@ export const SearchForm: React.FC<OwnProps> = ( { onSubmit } ) => {
                                component={ Input }
                                resetFieldBy={ form }
                                type={ 'input' }
-                               validate={ composeValidators( required ) }
+                               validate={ composeValidators( required, maxLength50 ) }
                         />
                         <div className={ styles.dropdowns }>
                             <div className={ styles.dropdown }>
@@ -63,8 +63,7 @@ export const SearchForm: React.FC<OwnProps> = ( { onSubmit } ) => {
                                         form.reset()
                                     } }
                                     mode={ 'Gray' }
-                            >X
-                            </Button>
+                            >X</Button>
                         </div>
                         { submitError && <span className={ styles.onError }>{ submitError }</span> }
                     </form>
