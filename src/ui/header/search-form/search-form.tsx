@@ -56,12 +56,17 @@ export const SearchForm: React.FC<OwnProps> = ( { onSubmit } ) => {
                             </div>
                         </div>
                         <div className={ styles.buttonsPanel }>
-                            <Button type={ 'submit' } disabled={ submitting } mode={ 'White' }>Done</Button>
+                            <Button type={ 'submit' }
+                                    disabled={ submitting }
+                                    mode={ 'White' }
+                                    title={ 'Clear & New Search' }
+                            >Done</Button>
                             <Button type={ 'reset' }
                                     disabled={ pristine || submitting }
                                     onClick={ () => {
                                         form.reset()
                                     } }
+                                    title={ 'Restore all fields to default' }
                                     mode={ 'Gray' }
                             >X</Button>
                         </div>
