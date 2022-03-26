@@ -17,9 +17,9 @@ Deploy:
 - Heroku = https://books-app-otto.herokuapp.com
 - Docker = https://hub.docker.com/r/ottovector/books-app  
 --------------------  
-  
+DOCKER LOCAL:  
 docker pull ottovector/books-app  
-docker run -d -p 3000:3000 --rm —name books_app ottovector/books-app    
+docker run -d -p 3000:3000 --rm --name books_app ottovector/books-app    
 смотрим в браузере через - localhost:3000  
 docker container stop books_app
 --------------------  
@@ -36,6 +36,6 @@ git push heroku master
 SHORT DOCKER:  
 docker login  
 docker build -t ottovector/books-app .  
-docker run -d -p 3000:3000 --rm —name books_app ottovector/books-app  
+docker run -d -p 3000:3000 --rm --name books_app ottovector/books-app  
 docker container stop books_app  
 docker push ottovector/books-app
