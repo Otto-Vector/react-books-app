@@ -19,7 +19,7 @@ type OwnProps = {}
 
 export const Header: React.FC<OwnProps> = () => {
 
-    const headerText = 'Search for books' // захардкодил название
+    const headerText = 'Search for Books' // захардкодил название
     const navigate = useNavigate()
     const dispatch = useDispatch()
     const pagination = useSelector( getPagination )
