@@ -22,7 +22,7 @@ Deploy:
   
 SHORT HEROKU:  
 heroku login  
-heroku create books-app-otto --buildpack mars/create-react-app
+heroku create books-app-otto --buildpack mars/create-react-app  
 heroku git:remote -a books-app-otto  
 git rm package-lock.json  
 git rm yarn.lock  
