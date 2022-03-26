@@ -15,7 +15,7 @@ Open [WORKING SITE HERE](https://books-app-otto.herokuapp.com) to view it in the
 
 Deploy:
 - Heroku = https://books-app-otto.herokuapp.com
-- Docker = https://hub.docker.com/r/ottovector/books-app  
+- Docker = [https://hub.docker.com/r/ottovector/books-app](https://hub.docker.com/r/ottovector/books-app)  
   
 // // // // // // // //  
 DOCKER LOCAL:  
