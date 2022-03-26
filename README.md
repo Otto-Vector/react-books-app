@@ -15,14 +15,26 @@ Open [WORKING SITE HERE](https://books-app-otto.herokuapp.com) to view it in the
 
 Deploy:
 - Heroku = https://books-app-otto.herokuapp.com
-- Docker = ???
-
-
-/ / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / /   
-SHORT:  
+- Docker = https://hub.docker.com/r/ottovector/books-app  
+--------------------  
+docker pull ottovector/books-app  
+docker run -d -p 3000:3000 --rm —name books_app ottovector/books-app    
+смотрим в браузере через - localhost:3000  
+docker container stop books_app
+--------------------  
+  
+SHORT HEROKU:  
 heroku login  
 heroku create books-app-otto --buildpack mars/create-react-app  
 git rm package-lock.json  
 git rm yarn.lock  
 git push heroku master
 
+--------------------  
+  
+SHORT DOCKER:  
+docker login  
+docker build -t ottovector/books-app .  
+docker run -d -p 3000:3000 --rm —name books_app ottovector/books-app  
+docker container stop books_app  
+docker push ottovector/books-app

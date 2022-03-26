@@ -112,7 +112,6 @@ const requestFormReducer = ( state = initialState, action: ActionsType ): Reques
 
 }
 
-// toDo: навести порядок в экшонах
 /* ЭКШОНЫ BOOKS */
 export const requestFormActions = {
     // установка значения в карточки пользователей одной страницы
