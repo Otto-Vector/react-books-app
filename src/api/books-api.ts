@@ -3,7 +3,11 @@ import { BooksApiResponseType, BooksRequest, PaginationType } from '../types/boo
 import * as queryString from 'querystring'
 import { BookInfoType } from '../types/book-info-type'
 
-const API_KEY = 'AIzaSyAYL_h8bTjemmcHhKGtf2V9-CtalYYMT04'
+// const API_KEY = 'AIzaSyAYL_h8bTjemmcHhKGtf2V9-CtalYYMT04'
+
+// переменная лежит в корне проекта в файле '.env'
+// заголовок переменной "REACT_APP_" - необходим
+const { REACT_APP_API_KEY } = process.env
 
 const instance = axios.create( {
     baseURL: 'https://www.googleapis.com/books/v1/',
@@ -32,7 +36,7 @@ export const getBooksFromApi = ( { bookName, categories, orderBy }: BooksRequest
             maxResults, // запрашиваемое количество книг (максимум 40)
             projection, // полное или краткое отображение инфы (чувствительно к subject)
             // langRestrict, // выбор языка
-            key: API_KEY,
+            key: REACT_APP_API_KEY,
         } )
         // чистим пустые значения
         .filter( n => n[1] !== '' )
