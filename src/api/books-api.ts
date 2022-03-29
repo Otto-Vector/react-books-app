@@ -3,8 +3,6 @@ import { BooksApiResponseType, BooksRequest, PaginationType } from '../types/boo
 import * as queryString from 'querystring'
 import { BookInfoType } from '../types/book-info-type'
 
-// const API_KEY = 'AIzaSyAYL_h8bTjemmcHhKGtf2V9-CtalYYMT04'
-
 // переменная лежит в корне проекта в файле '.env'
 // заголовок переменной "REACT_APP_" - необходим
 const { REACT_APP_API_KEY } = process.env

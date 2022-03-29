@@ -1,12 +1,11 @@
 import React from 'react'
 import classes from './header.module.scss'
-import bgBooks2 from '../../images/bg_books2.png'
+import bgBooks2 from '../../images/bg-books2.jpg'
 import { SearchForm } from './search-form/search-form'
 import { getBooks, requestFormActions } from '../../redux/request-form-reducer'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { getPagination } from '../../selectors/request-form-selectors'
-
 import { BooksRequest } from '../../types/books-api-types'
 
 
