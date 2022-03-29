@@ -1,6 +1,6 @@
 import React from 'react'
 import classes from './header.module.scss'
-import bgBooks2 from '../../images/bg-books2.jpg'
+import bgBooks from '../../images/bg-books3.jpg'
 import { SearchForm } from './search-form/search-form'
 import { getBooks, requestFormActions } from '../../redux/request-form-reducer'
 import { useDispatch, useSelector } from 'react-redux'
@@ -11,7 +11,7 @@ import { BooksRequest } from '../../types/books-api-types'
 
 const headerStyle: React.CSSProperties = {
     // вставил так, пока не знаю как правильно воткнуть ссылку на картинку в bg
-    'backgroundImage': `linear-gradient(0deg, #00000080, #00000020, #00000080), url(${ bgBooks2 })`,
+    'backgroundImage': `linear-gradient(0deg, #00000080, #00000020, #00000080), url(${ bgBooks })`,
 }
 
 type OwnProps = {}
