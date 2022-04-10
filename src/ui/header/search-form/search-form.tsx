@@ -9,6 +9,7 @@ import { useSelector } from 'react-redux'
 import { Button } from '../../common/button/button'
 import { getSelectFormsProps } from '../../../selectors/request-form-selectors'
 import { FormSelector } from '../../common/form-selector/form-selector'
+import { MaterialIcon } from '../../common/material-icon/material-icon'
 
 
 type OwnProps = {
@@ -55,7 +56,7 @@ export const SearchForm: React.FC<OwnProps> = ( { onSubmit } ) => {
                                     } }
                                     title={ 'Restore all fields to default' }
                                     mode={ 'Gray' }
-                            >X</Button>
+                            ><MaterialIcon icon_name={ 'close' }/></Button>
                         </div>
                         { submitError && <span className={ styles.onError }>{ submitError }</span> }
                     </form>
