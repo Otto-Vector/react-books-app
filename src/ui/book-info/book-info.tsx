@@ -56,8 +56,10 @@ export const BookInfo: React.FC = () => {
                 <div className={ classes.side }>
                     <div className={ classes.category }>{ categories?.join( ' / ' ) || 'Unknown category' }</div>
                     <h2 className={ classes.bookName } title={ 'Book header' }>{ title }</h2>
-                    <article className={ classes.authors } title={ 'Authors' }>{ authors?.join( ' | ' ) || 'AUTHOR NOT DEFINED' }</article>
-                    <div className={ classes.description }>{ removeAllHTMLTags( description ) || 'No description yet' }</div>
+                    <article className={ classes.authors }
+                             title={ 'Authors' }>{ authors?.join( ' | ' ) || 'AUTHOR NOT DEFINED' }</article>
+                    <div
+                        className={ classes.description }>{ removeAllHTMLTags( description ) || 'No description yet' }</div>
 
                     <div className={ classes.buttonsPanel }>
                         <a href={ previewLink }
@@ -67,14 +69,18 @@ export const BookInfo: React.FC = () => {
                                     mode={ 'White' }
                                     title={ 'Read in Google' }
                             >
-                                <MaterialIcon icon_name={ 'menu_book' }/>{ ' Read' }</Button>
+                                <MaterialIcon icon_name={ 'menu_book' }/>
+                                <span style={ { margin: '0 .2rem' } }> </span>
+                                { 'Read' }</Button>
                         </a>
                         <Button disabled={ totalBooks <= 0 }
                                 mode={ 'LightBlue' }
                                 title={ 'Go back' }
                                 onClick={ () => navigate( -1 ) }
                         >
-                            <MaterialIcon icon_name={ 'reply' }/>{ ' To List' }</Button>
+                            <MaterialIcon icon_name={ 'reply' }/>
+                            <span style={ { margin: '0 .2rem' } }> </span>
+                            { 'To List' }</Button>
                     </div>
                 </div>
             </div>
