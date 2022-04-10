@@ -8,6 +8,7 @@ import { BooksRequest } from '../../../types/books-api-types'
 import { useSelector } from 'react-redux'
 import { Button } from '../../common/button/button'
 import { getSelectFormsProps } from '../../../selectors/request-form-selectors'
+import { FormSelector } from '../../common/form-selector/form-selector'
 
 
 type OwnProps = {
@@ -38,22 +39,8 @@ export const SearchForm: React.FC<OwnProps> = ( { onSubmit } ) => {
                                validate={ composeValidators( required, maxLength50 ) }
                         />
                         <div className={ styles.dropdowns }>
-                            <div className={ styles.dropdown }>
-                                <label className={ styles.label }>{ 'Categories' }</label>
-                                <Field className={ styles.select } name={ 'categories' } component={ 'select' }>
-                                    { categories.map( value =>
-                                        <option value={ value } key={ value }>{ value }</option> )
-                                    }
-                                </Field>
-                            </div>
-                            <div className={ styles.dropdown }>
-                                <label className={ styles.label }>{ 'Sorting by' }</label>
-                                <Field className={ styles.select } name={ 'orderBy' } component={ 'select' }>
-                                    { orderBy.map( value =>
-                                        <option value={ value } key={ value }>{ value }</option> )
-                                    }
-                                </Field>
-                            </div>
+                            <FormSelector named={'categories'} values={categories} label={'Categories'}/>
+                            <FormSelector named={'orderBy'} values={orderBy} label={'Sorting by'}/>
                         </div>
                         <div className={ styles.buttonsPanel }>
                             <Button type={ 'submit' }
