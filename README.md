@@ -11,6 +11,7 @@ Open [WORKING SITE HERE](https://books-app-otto.herokuapp.com) to view it in the
 - SASS (SCSS)
 - Redux
 - react-final-form (для обработки/передачи введённых данных)
+- axios (API requests)
 - прочие микроутилиты и функции
 
 Deploy:
