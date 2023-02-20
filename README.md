@@ -6,7 +6,7 @@ React Google Book Search
 Open [WORKING SITE HERE](https://books-app-otto.herokuapp.com) to view it in the browser.
 
 Использовано:
-- React (функциональный подход + хуки )
+- React (функциональный подход + хуки)
 - TypeScript
 - SASS (SCSS)
 - Redux
