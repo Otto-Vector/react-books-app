@@ -114,11 +114,12 @@ const requestFormReducer = ( state = initialState, action: ActionsType ): Reques
 
 /* ЭКШОНЫ BOOKS */
 export const requestFormActions = {
-    // установка значения в карточки пользователей одной страницы
+    // установка списка загруженных по запросу книг
     setBooks: ( books: ItemBook[] | undefined ) => ({
         type: 'request-form-reducer/SET-BOOKS',
         books,
     } as const),
+    // зачистка списка книг
     clearBooksList: () => ({
         type: 'request-form-reducer/CLEAR-BOOKS-LIST',
     } as const),
@@ -127,10 +128,12 @@ export const requestFormActions = {
         type: 'request-form-reducer/SET-TOTAL-BOOKS-COUNT',
         totalBooks,
     } as const),
+    // значение id книги, которую надо развернуть на экране доп. информации
     setBookIdToView: ( bookId: string | undefined ) => ({
         type: 'request-form-reducer/SET-BOOK-ID-TO-VIEW',
         bookId,
     } as const),
+    // более полные значения данных выбранной книги (приходят из API)
     setFoundedBook: ( foundedBook: BookInfoType | null ) => ({
         type: 'request-form-reducer/SET-FOUNDED-BOOK-TO-VIEW',
         foundedBook,
@@ -178,6 +181,7 @@ export const getBooks = ( searchForm: BooksRequest,
         dispatch( requestFormActions.toggleIsFetching( false ) )
     }
 
+// запрос на одну книгу с развёрнутой информацией
 export const getOneBookFromApi = ( bookId: string ): UsersReducerThunkActionType =>
     async ( dispatch ) => {
         dispatch( requestFormActions.setApiError( null ) )
@@ -187,7 +191,6 @@ export const getOneBookFromApi = ( bookId: string ): UsersReducerThunkActionType
         } catch (e) {
             dispatch( requestFormActions.setApiError( `Not found book with id: ${ bookId } ` ) )
         }
-
     }
 
 export default requestFormReducer
